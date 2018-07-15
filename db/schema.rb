@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 20180608183614) do
     t.bigint "user_id"
     t.string "ad_format"
     t.datetime "last_served_at"
-    t.integer "aspect_ratio_width"
-    t.integer "aspect_ratio_height"
     t.boolean "rewarded"
     t.boolean "interstitial"
     t.integer "video_length"
+    t.integer "aspect_ratio_width"
+    t.integer "aspect_ratio_height"
     t.string "click_url_android"
     t.string "click_url_ios"
     t.string "call_to_action"
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20180608183614) do
     t.inet "last_sign_in_ip"
     t.string "authentication_token", limit: 30
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
