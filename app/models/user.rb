@@ -17,8 +17,6 @@ class User < ApplicationRecord
 
   ### ASSOCIATIONS ###
 
-  has_many :ad_units, dependent: :destroy
-  has_many :developer_apps, dependent: :destroy
 
   ### SCOPES ###
 
