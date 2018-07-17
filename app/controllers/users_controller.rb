@@ -11,10 +11,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    render json: { message: 'authenticated' }
-  end
-
   protected
 
   def user_params
