@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :course do
-    name "MyString"
-    start_date "2018-07-16 17:59:58"
-    duration 1
-    category "MyString"
-    difficulty "MyString"
+    name { Faker::String }
+    start_date Time.1.day.from_now
+    duration 30
+    category Course::VALID_CATEGORIES.sample
+    difficulty Course::VALID_DIFFICULTIES.sample
   end
 end
