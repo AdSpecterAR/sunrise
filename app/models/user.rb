@@ -13,10 +13,7 @@ class User < ApplicationRecord
 
   ### ASSOCIATIONS ###
 
-  # has_many :courses_taken, class_name: 'Course'
   has_many :courses
-  # has_many :courses, class_name: Course, foreign_key: :student_id, dependent: :destroy
-  # has_many :courses, class_name: Course, foreign_key: :instructor_id, dependent: :destroy
 
   ### SCOPES ###
 
@@ -24,7 +21,6 @@ class User < ApplicationRecord
   ### VALIDATIONS ###
 
   validates :first_name, :last_name, :email, presence: true
-  # validate :validate_instructor_courses
   validates_format_of :email, :with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
   # validate :password_valid
   # validate :email_presence
@@ -51,9 +47,6 @@ class User < ApplicationRecord
 
   private
 
-  # def validate_instructor_courses
-  #   !instructor && courses == 0
-  # end
 
   # def downcase_email
   #   self.email = email.downcase if email.present?

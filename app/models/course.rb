@@ -24,7 +24,7 @@ class Course < ApplicationRecord
   ### VALIDATIONS ###
 
   # validate that instructor's instructor boolean is equal to True
-  # validates_associated :instructor
+  validates_associated :instructor
 
   validates :name, :duration, presence: true
   validates :difficulty, presence: true, inclusion:  { in: VALID_DIFFICULTIES }

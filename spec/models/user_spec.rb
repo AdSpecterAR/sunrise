@@ -2,11 +2,6 @@ require 'rails_helper'
 
 describe User, type: :model do
   let(:user) { create(:user, :instructor) }
-  # let(:course_taught) { create(:course, instructor: user) }
-  #
-  # before do
-  #   user.courses << course_taught
-  # end
 
   describe 'validations' do
     it "should be valid" do
