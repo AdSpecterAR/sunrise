@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   ### ASSOCIATIONS ###
 
+  has_many :courses_taken, class_name: 'Course'
   # has_many :courses, class_name: Course, foreign_key: :student_id, dependent: :destroy
   # has_many :courses, class_name: Course, foreign_key: :instructor_id, dependent: :destroy
 

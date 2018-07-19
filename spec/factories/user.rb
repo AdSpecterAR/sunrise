@@ -8,13 +8,13 @@ FactoryBot.define do
     password { 'password1' }
   end
 
-  # trait :developer do
-  #   account_type User::ACCOUNT_TYPE_DEVELOPER
-  # end
-  #
-  # trait :advertiser do
-  #   account_type User::ACCOUNT_TYPE_ADVERTISER
-  # end
+  trait :instructor do
+    instructor true
+  end
+
+  trait :admin do
+    admin true
+  end
 
   trait :new do
     id nil
