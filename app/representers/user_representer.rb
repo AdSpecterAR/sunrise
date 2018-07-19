@@ -9,7 +9,6 @@ class UserRepresenter < Representable::Decorator
   property :first_name
   property :last_name
   property :full_name
-  property :account_type
   property :username
   property :email
   property :authentication_token

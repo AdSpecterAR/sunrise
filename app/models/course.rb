@@ -19,8 +19,15 @@ class Course < ApplicationRecord
 
   ### ASSOCIATIONS ###
 
+  belongs_to :instructor, class_name: 'User'
+
   ### VALIDATIONS ###
-  validates :name, :start_date, :duration, presence: true
+
+  # validate that instructor's instructor boolean is equal to True
+  validates_associated :instructor
+
+  validates :name, :duration, presence: true
   validates :difficulty, presence: true, inclusion:  { in: VALID_DIFFICULTIES }
   validates :category, presence: true, inclusion:  { in: VALID_CATEGORIES }
+
 end

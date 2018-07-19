@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Course, :type => :model do
-  let(:course) { create(:course) }
+  let(:instructor) { create(:user, :instructor) }
+  let(:course) { create(:course, instructor: instructor) }
 
   it "is valid with valid attributes" do
     expect(course).to be_valid
@@ -12,13 +13,6 @@ RSpec.describe Course, :type => :model do
 
     expect(course).not_to be_valid
   end
-
-  it "is not valid without a start_date" do
-    course.update(start_date: nil)
-
-    expect(course).not_to be_valid
-  end
-
 
   it "is not valid without a duration" do
     course.update(duration: nil)

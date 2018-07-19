@@ -8,7 +8,6 @@ resource "Users" do
     {
       first_name: 'John',
       last_name: 'Wooden',
-      account_type: 'developer',
       email: 'johnwooden@ucla.edu',
       password: 'password1',
       user_id: 1
@@ -28,7 +27,6 @@ resource "Users" do
     parameter :user, "New user", :required => true
     parameter :first_name, "First name", :scope => :user
     parameter :last_name, "Last name", :scope => :user
-    parameter :account_type, "Developer or Advertiser", :scope => :user
     parameter :email, "Email account", :scope => :user
     parameter :password, "Password", :scope => :user
 
