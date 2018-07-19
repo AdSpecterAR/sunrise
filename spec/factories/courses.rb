@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :course do
-    name { Faker::String }
-    start_date Time.1.day.from_now
+    name { Faker::Name.first_name }
+    start_date Time.current.tomorrow
     duration 30
     category Course::VALID_CATEGORIES.sample
     difficulty Course::VALID_DIFFICULTIES.sample

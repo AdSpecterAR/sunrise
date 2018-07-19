@@ -10,10 +10,6 @@ class User < ApplicationRecord
 
   ### CONSTANTS ###
 
-  ACCOUNT_TYPE_ADVERTISER = 'advertiser'
-  ACCOUNT_TYPE_DEVELOPER = 'developer'
-  VALID_ACCOUNT_TYPES = [ACCOUNT_TYPE_ADVERTISER, ACCOUNT_TYPE_DEVELOPER]
-
 
   ### ASSOCIATIONS ###
 

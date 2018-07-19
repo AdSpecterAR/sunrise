@@ -17,9 +17,7 @@ class Course < ApplicationRecord
     CATEGORY_CARDIO,
   ]
 
-
-
-
+  ### ASSOCIATIONS ###
 
   ### VALIDATIONS ###
   validates :name, :start_date, :duration, presence: true
