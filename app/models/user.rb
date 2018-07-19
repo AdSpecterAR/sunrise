@@ -10,13 +10,11 @@ class User < ApplicationRecord
 
   ### CONSTANTS ###
 
-  ACCOUNT_TYPE_ADVERTISER = 'advertiser'
-  ACCOUNT_TYPE_DEVELOPER = 'developer'
-  VALID_ACCOUNT_TYPES = [ACCOUNT_TYPE_ADVERTISER, ACCOUNT_TYPE_DEVELOPER]
-
 
   ### ASSOCIATIONS ###
 
+  # has_many :courses, class_name: Course, foreign_key: :student_id, dependent: :destroy
+  # has_many :courses, class_name: Course, foreign_key: :instructor_id, dependent: :destroy
 
   ### SCOPES ###
 

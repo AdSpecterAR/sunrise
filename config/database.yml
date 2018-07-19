@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: sanchez_dev
+  database: sunrise_dev
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -37,11 +37,13 @@ development:
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  #host: localhost
+#  username: postgres
+#  password: password
+#  host: localhost
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
-  #port: 5432
+  port: 5432
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -54,15 +56,17 @@ development:
 
 staging:
   <<: *default
-  database: sanchez_staging
+  database: sunrise_staging
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: sanchez_test
-
+  database: sunrise_test
+#  username: postgres
+#  password: password
+#  host: localhost
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
@@ -84,6 +88,6 @@ test:
 #
 production:
   <<: *default
-  database: sanchez_production
-  username: sanchez
+  database: sunrise_production
+  username: sunrise
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
