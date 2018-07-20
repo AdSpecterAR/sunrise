@@ -20,10 +20,7 @@ RSpec.describe CourseSession, type: :model do
 
       expect(course_session).not_to be_valid
     end
-  #it "is invalid without a duration" do
-   # course_session.update(duration: nil)
 
-    #expect(course_session).not_to be_valid
   end
 
   describe 'associations' do
@@ -55,6 +52,7 @@ RSpec.describe CourseSession, type: :model do
     it "includes sessions with start_date including and after 1 hour ago" do
       expect(CourseSession.courses_in_next_24_hours).to include(course_session2)
     end
+    
     it "returns array sorted by start_time" do
       puts CourseSession.courses_in_next_24_hours
       expect(CourseSession.courses_in_next_24_hours.first).to eql course_session2

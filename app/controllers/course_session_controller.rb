@@ -1,4 +1,5 @@
 class CourseSessionController < ApplicationController
+
   def upcoming_classes
     @sessions = courses_in_next_24_hours
     render json: {
@@ -7,4 +8,5 @@ class CourseSessionController < ApplicationController
         }
     }
   end
+
 end
