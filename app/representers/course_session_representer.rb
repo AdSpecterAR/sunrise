@@ -5,10 +5,11 @@ class CourseSessionRepresenter < Representable::Decorator
 
   defaults render_nil: true
 
-  #property
-  # start_time
-  # thumbnail url
-  # video url
-  # duration
-  # instructor_name(instructor.first_name + instructor.last_name)
+  property :id
+  property :start_time
+  property :thumbnail_image_url
+  property :video_url
+  property :duration
+  property :instructor_full_name
+  property :course
 end
