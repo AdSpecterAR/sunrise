@@ -20,6 +20,7 @@ class Course < ApplicationRecord
   ### ASSOCIATIONS ###
 
   belongs_to :instructor, class_name: 'User'
+  has_many :course_sessions
 
   ### VALIDATIONS ###
 
