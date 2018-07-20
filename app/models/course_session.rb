@@ -10,11 +10,9 @@ class CourseSession < ApplicationRecord
 
   class << self
     def courses_in_next_24_hours
-      course_sessions = CourseSession
-                          .where(start_time: 1.hour.ago..24.hours.from_now)
-                          .sort_by { |course_session| course_session.start_time }
-
-      course_sessions
+      CourseSession
+        .where(start_time: 1.hour.ago..24.hours.from_now)
+        .sort_by { |course_session| course_session.start_time }
     end
   end
 
