@@ -4,6 +4,5 @@ FactoryBot.define do
     duration 30
     category Course::VALID_CATEGORIES.sample
     difficulty Course::VALID_DIFFICULTIES.sample
-    # instructor
   end
 end

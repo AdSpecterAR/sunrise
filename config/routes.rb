@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   ### USERS ###
 
   post "/users" => "users#create"
+
+  get "/upcoming_courses" => "course_sessions#upcoming_courses"
 end
