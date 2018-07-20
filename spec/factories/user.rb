@@ -11,6 +11,10 @@ FactoryBot.define do
     instructor true
   end
 
+  trait :student do
+    instructor false
+  end
+
   trait :admin do
     admin true
   end
