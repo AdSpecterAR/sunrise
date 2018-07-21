@@ -3,6 +3,8 @@ class CourseSession < ApplicationRecord
   ### ASSOCIATIONS ###
 
   belongs_to :course
+  has_many :user_course_sessions
+  has_many :students, through: :user_course_sessions
 
   ### VALIDATIONS ###
 

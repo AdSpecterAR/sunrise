@@ -11,5 +11,7 @@ class UserRepresenter < Representable::Decorator
   property :full_name
   property :username
   property :email
+  property :admin
+  property :instructor
   property :authentication_token
 end
