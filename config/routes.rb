@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   ### USERS ###
 
-  post "/users" => "users#create"
+  post "/users" => "users#create", as: :create
 
   get "/upcoming_courses" => "course_sessions#upcoming_courses"
   get "/users/:user_id/course_sessions/:course_session_id" => "user_course_sessions#get_user_course_session",
@@ -20,5 +20,7 @@ Rails.application.routes.draw do
 
   post "/user_course_sessions/:user_course_session_id/feedback/" => "user_course_sessions#post_feedback",
        as: :post_feedback
+
+  # root to: "/upcoming_courses"
 
 end

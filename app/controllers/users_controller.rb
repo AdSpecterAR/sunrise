@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :create
 
   def create
     @user = User.new(user_params)
@@ -20,7 +20,8 @@ class UsersController < ApplicationController
         :first_name,
         :last_name,
         :full_name,
-        :email
+        :email,
+        :password
       )
   end
 end

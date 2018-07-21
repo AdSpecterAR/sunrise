@@ -12,10 +12,10 @@ describe UsersController, type: :controller do
 
   let(:bad_user_params) do
     {
-        first_name: 'jess',
-        last_name: 'Zhanfg',
-        email: 'bad.com',
-        password: 'haha'
+        first_name: 'Jess',
+        last_name: 'Zhang',
+        email: 'incorrectemailformat.com',
+        password: 'password2'
     }
   end
 
