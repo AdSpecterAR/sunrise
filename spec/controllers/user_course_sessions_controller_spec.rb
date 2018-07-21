@@ -10,9 +10,10 @@ RSpec.describe UserCourseSessionsController, type: :controller do
 
   let(:feedback_params) do
     {
-        user_course_session: user_course_session,
-        rating: UserCourseSession::RATING_THUMBS_DOWN,
-        comment: 'boooo, you suck!'
+        user_course_session: {
+          rating: UserCourseSession::RATING_THUMBS_DOWN,
+          comment: 'boooo, you suck!'
+        }
     }
   end
 
