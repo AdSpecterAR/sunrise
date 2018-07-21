@@ -13,7 +13,7 @@ describe UsersController, type: :controller do
   let(:bad_user_params) do
     {
         first_name: 'jess',
-        last_name: 'Zhang',
+        last_name: 'Zhanfg',
         email: 'bad.com',
         password: 'haha'
     }
