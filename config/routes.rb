@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get "/users/:user_id/course_session/:course_session_id" => "user_course_sessions#get_user_course_session",
       as: :get_user_course_session
 
-  post "/user_course_session/:user_course_session_id/feedback" => "user_course_sessions#post_feedback",
+  post "/user_course_session/:user_course_session_id/feedback/" => "user_course_sessions#post_feedback",
        as: :post_feedback
 
 end
