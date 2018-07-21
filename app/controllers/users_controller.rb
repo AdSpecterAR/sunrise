@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: { user: UserRepresenter.represent(@user) }
     else
-      render json: { error: "error" }
+      render json: { error: "error" }, status: 422
     end
   end
 
