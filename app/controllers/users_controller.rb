@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     else
       render json: { error: "error" }, status: 422
     end
+
   end
 
   protected

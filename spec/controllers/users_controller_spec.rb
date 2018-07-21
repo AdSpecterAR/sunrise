@@ -32,7 +32,10 @@ describe UsersController, type: :controller do
       expect(response).not_to be_success
     end
 
-    it "logs user in after signing up"
+    it "logs user in after signing up" do
+      post :create, params: { user: new_user_params }, format: :as_json
+
+    end
 
   end
 end
