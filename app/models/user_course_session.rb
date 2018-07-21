@@ -1,19 +1,22 @@
 class UserCourseSession < ApplicationRecord
 
-  RATING_THUMBS_UP = 'thumbs up'
-  RATING_THUMBS_DOWN = 'thumb down'
-
+  RATING_THUMBS_UP = 'thumbs_up'
+  RATING_THUMBS_DOWN = 'thumb_down'
   VALID_RATINGS = [
-      RATING_THUMBS_DOWN,
-      RATING_THUMBS_UP,
-      nil
+    RATING_THUMBS_DOWN,
+    RATING_THUMBS_UP
   ]
+
+
   ### ASSOCIATIONS ###
+
   belongs_to :student, class_name: 'User'
   belongs_to :course_session
 
+
   ### VALIDATIONS ###
-  validates :rating, inclusion: { in: VALID_RATINGS }
+
+  validates :rating, inclusion: { in: VALID_RATINGS }, allow_blank: true
 
 
   class << self
