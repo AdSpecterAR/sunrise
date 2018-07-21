@@ -4,7 +4,7 @@ class CourseSession < ApplicationRecord
 
   belongs_to :course
   has_many :user_course_sessions
-  has_many :users, through: :user_course_sessions
+  has_many :students, through: :user_course_sessions
 
   ### VALIDATIONS ###
 
