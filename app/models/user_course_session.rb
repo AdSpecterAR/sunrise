@@ -1,7 +1,7 @@
 class UserCourseSession < ApplicationRecord
 
   RATING_THUMBS_UP = 'thumbs_up'
-  RATING_THUMBS_DOWN = 'thumb_down'
+  RATING_THUMBS_DOWN = 'thumbs_down'
   VALID_RATINGS = [
     RATING_THUMBS_DOWN,
     RATING_THUMBS_UP

@@ -10,14 +10,15 @@ RSpec.describe UserCourseSessionsController, type: :controller do
 
   let(:feedback_params) do
     {
-        rating: 'thumbs down',
+        user_course_session: user_course_session,
+        rating: UserCourseSession::RATING_THUMBS_DOWN,
         comment: 'boooo, you suck!'
     }
   end
 
   describe 'get_user_course_session' do
     it "returns the thing" do
-      get :get_user_course_session, params: { :user_id => student.id, :course_session_id => course_session.id }, format: :as_json
+      get :get_user_course_session, params: { :user_id => student.id, course_session_id: course_session.id }, format: :as_json
 
       expect(response).to be_success
     end
@@ -27,7 +28,7 @@ RSpec.describe UserCourseSessionsController, type: :controller do
     it "fills in the feedback" do
       post :post_feedback,
            params:
-               { feedback: feedback_params , :user_course_session => user_course_session.id}
+               { user_course_session: feedback_params , user_course_session_id: user_course_session.id}
 
       expect(response).to be_success
     end

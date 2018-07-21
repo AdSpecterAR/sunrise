@@ -35,8 +35,8 @@ RSpec.describe UserCourseSession, type: :model do
 
   describe 'add_feedback' do
     it "fills in valid feedback" do
-      user_course_session.add_feedback('thumbs up', "wow nice workout i swe.at so much")
-      expect(user_course_session.rating).to eql 'thumbs up'
+      user_course_session.add_feedback(UserCourseSession::RATING_THUMBS_UP, "wow nice workout i swe.at so much")
+      expect(user_course_session.rating).to eql UserCourseSession::RATING_THUMBS_UP
       expect(user_course_session.comment).to eql "wow nice workout i swe.at so much"
     end
 
