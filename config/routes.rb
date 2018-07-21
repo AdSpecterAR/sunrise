@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   ### AUTHENTICATION ###
 
   resources :sessions, only: [:create, :destroy]
+  resources :users
 
   ### USERS ###
 
