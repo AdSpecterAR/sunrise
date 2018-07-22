@@ -32,7 +32,6 @@ describe UsersController, type: :controller do
   end
 
   describe "#create" do
-
     it "creates a new user with email" do
       post :create, params: { user: new_user_params }, format: :as_json
       expect(response).to be_success
@@ -65,14 +64,13 @@ describe UsersController, type: :controller do
   end
 
   describe "facebook" do
-
     it "creates a new user with facebook" do
-      post :create, params: { user: facebook_params }, format: :as_json
+      post :facebook_authentication, params: { user: facebook_params }, format: :as_json
       expect(response).to be_success
     end
 
     it "fills in all the right fields in User" do
-      post :create, params: { user: facebook_params }, format: :as_json
+      post :facebook_authentication, params: { user: facebook_params }, format: :as_json
       response_json = parsed_response_json(response)
 
       expect(response_json).to have_key :user
