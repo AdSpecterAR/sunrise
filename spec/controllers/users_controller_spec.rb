@@ -25,8 +25,8 @@ describe UsersController, type: :controller do
         last_name: 'Zuck',
         email: 'mark.zuck@berg.com',
         password: 'beepbeepbop',
-        fb_authentication_token: 'yabadabadoo',
-        fb_user_id: 'yippeekiyay',
+        fb_authentication_token: 'fjdh3g4j4k55fijd####4k',
+        fb_user_id: '8563528909876396',
         fb_account: true
     }
   end
@@ -53,9 +53,7 @@ describe UsersController, type: :controller do
       response_json = parsed_response_json(response)
 
       expect(response_json[:user][:first_name]).to eql new_user_params[:first_name]
-
       expect(response_json[:user][:last_name]).to eql new_user_params[:last_name]
-
       expect(response_json[:user][:email]).to eql new_user_params[:email]
     end
 
