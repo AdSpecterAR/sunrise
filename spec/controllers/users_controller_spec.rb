@@ -31,6 +31,17 @@ describe UsersController, type: :controller do
     }
   end
 
+  let(:facebook_params2) do
+    {
+        first_name: 'Zark',
+        last_name: 'Muck',
+        password: 'password',
+        fb_authentication_token: 'fdakl2k2k3k4jgjlk###',
+        fb_user_id: '8563528909876396',
+        fb_account: true
+    }
+  end
+
   describe "#create" do
     it "creates a new user with email" do
       post :create, params: { user: new_user_params }, format: :as_json
@@ -81,8 +92,8 @@ describe UsersController, type: :controller do
       expect(response_json[:user]).to have_key :fb_account
     end
 
-    it "fill the user fields with the right values" do
-      post :create, params: { user: facebook_params }, format: :as_json
+    it "fills the user fields with the right values" do
+      post :facebook_authentication, params: { user: facebook_params }, format: :as_json
       response_json = parsed_response_json(response)
 
       expect(response_json[:user][:first_name]).to eql facebook_params[:first_name]
@@ -90,6 +101,24 @@ describe UsersController, type: :controller do
       expect(response_json[:user][:fb_authentication_token]).to eql facebook_params[:fb_authentication_token]
       expect(response_json[:user][:fb_user_id]).to eql facebook_params[:fb_user_id]
       expect(response_json[:user][:fb_account]).to eql facebook_params[:fb_account]
+    end
+
+    it "returns existing using instead of creating duplicate" do
+      post :facebook_authentication, params: { user: facebook_params }, format: :as_json
+      first_user = parsed_response_json(response)
+
+      post :facebook_authentication, params: { user: facebook_params }, format: :as_json
+      response_json = parsed_response_json(response)
+
+      expect(response_json).to have_key :user
+      expect(response_json[:user]).to eql first_user[:user]
+
+      post :facebook_authentication, params: { user: facebook_params2 }, format: :as_json
+      response_json = parsed_response_json(response)
+
+      expect(response_json).to have_key :user
+      expect(response_json[:user]).to eql first_user[:user]
+
     end
 
   end
