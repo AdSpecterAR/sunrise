@@ -23,7 +23,7 @@ describe UsersController, type: :controller do
     {
         first_name: 'Mark',
         last_name: 'Zuck',
-        email: 'mark.zuck@berg.com',
+        #email: 'mark@zuck.com',
         password: 'beepbeepbop',
         fb_authentication_token: 'fjdh3g4j4k55fijd####4k',
         fb_user_id: '8563528909876396',
@@ -78,7 +78,6 @@ describe UsersController, type: :controller do
       expect(response_json).to have_key :user
       expect(response_json[:user]).to have_key :first_name
       expect(response_json[:user]).to have_key :last_name
-      expect(response_json[:user]).to have_key :email
       expect(response_json[:user]).to have_key :fb_authentication_token
       expect(response_json[:user]).to have_key :fb_user_id
       expect(response_json[:user]).to have_key :fb_account
@@ -90,7 +89,6 @@ describe UsersController, type: :controller do
 
       expect(response_json[:user][:first_name]).to eql facebook_params[:first_name]
       expect(response_json[:user][:last_name]).to eql facebook_params[:last_name]
-      expect(response_json[:user][:email]).to eql facebook_params[:email]
       expect(response_json[:user][:fb_authentication_token]).to eql facebook_params[:fb_authentication_token]
       expect(response_json[:user][:fb_user_id]).to eql facebook_params[:fb_user_id]
       expect(response_json[:user][:fb_account]).to eql facebook_params[:fb_account]
