@@ -22,7 +22,10 @@ class UsersController < ApplicationController
         :last_name,
         :full_name,
         :email,
-        :password
+        :password,
+        :fb_authentication_token,
+        :fb_user_id,
+        :fb_account
       )
   end
 end
