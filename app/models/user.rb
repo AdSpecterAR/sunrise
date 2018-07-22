@@ -46,10 +46,6 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def signed_in?
-    user_signed_in?
-  end
-
   private
 
 
