@@ -8,7 +8,7 @@ class UserCourseSessionRepresenter < Representable::Decorator
   property :id
   property :rating
   property :comment
-  property :course_session
+  property :course_session, decorator: CourseSessionRepresenter
   property :student
   property :created_at
   property :updated_at

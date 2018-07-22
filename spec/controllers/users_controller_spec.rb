@@ -12,33 +12,33 @@ describe UsersController, type: :controller do
 
   let(:bad_user_params) do
     {
-        first_name: 'Jess',
-        last_name: 'Zhang',
-        email: 'incorrectemailformat.com',
-        password: 'password2'
+      first_name: 'Jess',
+      last_name: 'Zhang',
+      email: 'incorrectemailformat.com',
+      password: 'password2'
     }
   end
 
   let(:facebook_params) do
     {
-        first_name: 'Mark',
-        last_name: 'Zuck',
-        #email: 'mark@zuck.com',
-        password: 'beepbeepbop',
-        fb_authentication_token: 'fjdh3g4j4k55fijd####4k',
-        fb_user_id: '8563528909876396',
-        fb_account: true
+      first_name: 'Mark',
+      last_name: 'Zuck',
+      #email: 'mark@zuck.com',
+      password: 'beepbeepbop',
+      fb_authentication_token: 'fjdh3g4j4k55fijd####4k',
+      fb_user_id: '8563528909876396',
+      fb_account: true
     }
   end
 
   let(:facebook_params2) do
     {
-        first_name: 'Zark',
-        last_name: 'Muck',
-        password: 'password',
-        fb_authentication_token: 'fdakl2k2k3k4jgjlk###',
-        fb_user_id: '8563528909876396',
-        fb_account: true
+      first_name: 'Zark',
+      last_name: 'Muck',
+      password: 'password',
+      fb_authentication_token: 'fdakl2k2k3k4jgjlk###',
+      fb_user_id: '8563528909876396',
+      fb_account: true
     }
   end
 

@@ -16,10 +16,14 @@ class UsersController < ApplicationController
 
   def facebook_authentication
     @fb_user_id = facebook_params[:fb_user_id]
+    #checks if this user already exists
     @user = User.find_by(fb_user_id: @fb_user_id)
-    if(@user.nil?)
+
+    if @user.nil?
+      #user does not exist, creates a new user
       @user = User.new(facebook_params)
 
+      #user doesn't have an email, we need email for validation so we make a fake one
       if facebook_params[:email].nil?
         @random_string = SecureRandom.hex
         @user.email = "#{facebook_params[:first_name]}#{facebook_params[:last_name]}#{@random_string}@facebook.com"
@@ -27,12 +31,15 @@ class UsersController < ApplicationController
 
       @user.password = @user.email # needs password to pass validation
 
+      #returns user if successfully saved, else returns error
       if @user.save
         render json: { user: UserRepresenter.represent(@user) }
       else
         render json: { error: "error" }, status: 422
       end
+
     else
+      #user already exists, sign them in
       render json: { user: UserRepresenter.represent(@user) }
       #signs in existing user, still have to create sessions for sign in later!
     end

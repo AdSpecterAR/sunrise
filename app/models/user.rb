@@ -47,10 +47,6 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def not_facebook_account?
-    !fb_account
-  end
-
   private
 
 
