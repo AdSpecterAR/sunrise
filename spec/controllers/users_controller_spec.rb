@@ -10,12 +10,28 @@ describe UsersController, type: :controller do
     }
   end
 
+  let(:bad_user_params) do
+    {
+        first_name: 'Jess',
+        last_name: 'Zhang',
+        email: 'incorrectemailformat.com',
+        password: 'password2'
+    }
+  end
+
   describe "#create" do
 
     it "creates a new user" do
-      post :create, params: { user: new_user_params }, format: :json
+      post :create, params: { user: new_user_params }, format: :as_json
 
       expect(response).to be_success
     end
+
+    it "doesn't accept invalid params" do
+      post :create, params: { user: bad_user_params }, format: :as_json
+      expect(response).not_to be_success
+    end
+
   end
+
 end

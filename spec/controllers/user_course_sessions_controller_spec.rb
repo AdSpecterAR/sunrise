@@ -19,7 +19,7 @@ RSpec.describe UserCourseSessionsController, type: :controller do
 
   describe 'get_user_course_session' do
     it "returns the thing" do
-      get :get_user_course_session, params: { :user_id => student.id, course_session_id: course_session.id }, format: :as_json
+      get :get_user_course_session, params: { user_id: student.id, course_session_id: course_session.id }, format: :as_json
 
       expect(response).to be_success
     end
