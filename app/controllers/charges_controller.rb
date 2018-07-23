@@ -18,6 +18,7 @@ class ChargesController < ApplicationController
 
       @customer_id = customer.id
       #save the customer id in user table
+      # TODO: move this out of controller and into a model method
       @user.update(stripe_customer_id: @customer_id)
     end
 
