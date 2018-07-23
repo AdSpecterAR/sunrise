@@ -23,5 +23,7 @@ Rails.application.routes.draw do
 
   post "/user_course_sessions/:user_course_session_id/feedback/" => "user_course_sessions#post_feedback",
        as: :post_feedback
+
+  post "/subscribe" => "charges#subscribe", as: :subscribe
   
 end

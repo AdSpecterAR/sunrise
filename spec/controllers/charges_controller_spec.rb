@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe ChargesController, type: :controller do
 
   let!(:user) { create(:user) }
+  let!(:plan) { create(:plan) }
 
   let(:stripe_params) do
     {
@@ -11,6 +12,14 @@ RSpec.describe ChargesController, type: :controller do
       amount: 500,
       description: 'charge',
       currency: 'usd'
+    }
+  end
+
+  let(:subscribe_params) do
+    {
+        user_id: user.id,
+        plan_id: plan.id,
+        trial_subscription_days: 14
     }
   end
 
@@ -39,6 +48,21 @@ RSpec.describe ChargesController, type: :controller do
 
       user.reload
       expect(user.stripe_customer_id).to eql @customer_id
+    end
+  end
+
+  describe 'subscribe' do
+    it "returns a subscription" do
+      post :subscribe, params: { subscription: subscribe_params }, format: :as_json
+
+      expect(response).to be_success
+      response_json = parsed_response_json(response)
+
+      expect(response_json).to have_key :stripe
+      expect(response_json[:stripe]).to have_key :customer
+      expect(response_json[:stripe][:customer]).to eql user.stripe_customer_id
+      expect(response_json[:stripe]).to have_key :items
+      expect(response_json[:stripe][:items]).to have_key :plan
     end
   end
 
