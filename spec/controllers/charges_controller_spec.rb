@@ -27,8 +27,18 @@ RSpec.describe ChargesController, type: :controller do
     end
 
     it "doesn't create a new customer if user already has customer id" do
+      user.update(stripe_customer_id: nil)
       post :create, params: { charge: stripe_params }, format: :as_json
 
+      expect(response).to be_success
+      user.reload
+      @customer_id = user.stripe_customer_id
+      expect(@customer_id).not_to be_nil
+
+      post :create, params: { charge: stripe_params }, format: :as_json
+
+      user.reload
+      expect(user.stripe_customer_id).to eql @customer_id
     end
   end
 
