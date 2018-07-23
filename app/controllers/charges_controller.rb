@@ -18,9 +18,12 @@ class ChargesController < ApplicationController
       :description => stripe_params[:description]
     )
 
-  rescue Stripe::CardError => e
-    render json: { error: e.message }, status: 422
+    render json: { message: 'Successful charge!' }
+
+    rescue Stripe::CardError => e
+      render json: { message: 'ERROR' }, status: 422
   end
+
 
   protected
 
