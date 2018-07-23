@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20180723183300) do
     t.string "fb_user_id"
     t.boolean "fb_account"
     t.string "stripe_customer_id"
+    t.string "stripe_subscription_id"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
