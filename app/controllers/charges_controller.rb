@@ -6,16 +6,27 @@ class ChargesController < ApplicationController
   def create
     # Amount in cents
     @amount = stripe_params[:amount]
+    @user = User.find_by_id(stripe_params[:user_id])
 
-    customer = Stripe::Customer.create(
-      :source  => stripe_params[:stripeToken]
-    )
+    @customer_id = @user.stripe_customer_id
+
+    #if the customer doesn't already have stripe id, create a new stripe customer
+    if @customer_id.nil?
+      customer = Stripe::Customer.create(
+          :source  => stripe_params[:stripeToken]
+      )
+
+      @customer_id = customer.id
+      #save the customer id in user table
+      # TODO: move this out of controller and into a model method
+      @user.update(stripe_customer_id: @customer_id)
+    end
 
     charge = Stripe::Charge.create(
-      :customer    => customer.id,
-      :amount      => @amount,
-      :currency    => stripe_params[:currency],
-      :description => stripe_params[:description]
+        :customer    => @customer_id,
+        :amount      => @amount,
+        :currency    => stripe_params[:currency],
+        :description => stripe_params[:description]
     )
 
     render json: { message: 'Successful charge!' }
@@ -31,6 +42,7 @@ class ChargesController < ApplicationController
     params
     .require(:charge)
     .permit(
+        :user_id,
         :stripeToken,
         :amount,
         :description,
