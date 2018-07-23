@@ -39,7 +39,7 @@ RSpec.describe UserCourseSessionsController, type: :controller do
     it "fills in the feedback" do
       post :post_feedback,
        params: {
-         user_course_session: feedback_params ,
+         user_course_session: feedback_params,
          user_course_session_id: user_course_session.id
        }
 

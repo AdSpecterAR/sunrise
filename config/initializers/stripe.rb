@@ -5,4 +5,6 @@ Rails.configuration.stripe = {
     :secret_key      => 'sk_test_1IGSWRw5f2lM59WGIQqGgqcX'
 }
 
+# TODO: MOVE THE ABOVE TO ENV FILE
+
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
