@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   acts_as_token_authenticatable
 
+  attr_reader :stripe_customer_id
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -47,6 +48,9 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def stripe_customer_id
+    @stripe_customer_id
+  end
   private
 
 

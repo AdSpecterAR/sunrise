@@ -18,6 +18,8 @@ class ChargesController < ApplicationController
       :description => stripe_params[:description]
     )
 
+    User.update(stripe_params[:user_id], :stripe_customer_id => customer.id)
+
     render json: { message: 'Successful charge!' }
 
     rescue Stripe::CardError => e
@@ -31,6 +33,7 @@ class ChargesController < ApplicationController
     params
     .require(:charge)
     .permit(
+        :user_id,
         :stripeToken,
         :amount,
         :description,
