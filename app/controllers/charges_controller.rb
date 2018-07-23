@@ -6,6 +6,7 @@ class ChargesController < ApplicationController
   def create
     # Amount in cents
     @amount = stripe_params[:amount]
+    @user = User.find_by_id(stripe_params[:user_id])
 
     customer = Stripe::Customer.create(
       :source  => stripe_params[:stripeToken]
@@ -18,7 +19,7 @@ class ChargesController < ApplicationController
       :description => stripe_params[:description]
     )
 
-    User.update(stripe_params[:user_id], :stripe_customer_id => customer.id)
+    @user.update(stripe_customer_id: customer.id)
 
     render json: { message: 'Successful charge!' }
 
