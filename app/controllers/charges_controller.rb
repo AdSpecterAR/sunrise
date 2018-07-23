@@ -29,7 +29,7 @@ class ChargesController < ApplicationController
         :description => stripe_params[:description]
     )
 
-    render json: { message: 'Successful charge!' }
+    render json: { stripe: charge }
 
     rescue Stripe::CardError => e
       render json: { message: 'ERROR' }, status: 422
@@ -51,6 +51,8 @@ class ChargesController < ApplicationController
       @user.update(stripe_customer_id: @customer_id)
     end
 
+    # add check to see if subscription already exists
+    # add associated plan to user
     subscription = Stripe::Subscription.create(
                                           customer: @customer_id,
                                           items: [
@@ -62,7 +64,6 @@ class ChargesController < ApplicationController
     )
 
     render json: {stripe: subscription }
-
   end
 
 
