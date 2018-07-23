@@ -13,6 +13,8 @@ class User < ApplicationRecord
 
   ### ASSOCIATIONS ###
 
+  has_one :plan
+
   has_many :courses
   has_many :user_course_sessions
   has_many :course_sessions, through: :user_course_sessions
