@@ -39,6 +39,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'devise'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'rspec_api_documentation'
+gem 'stripe'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

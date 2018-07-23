@@ -38,8 +38,8 @@ RSpec.describe UserCourseSessionsController, type: :controller do
   describe 'post_feedback' do
     it "fills in the feedback" do
       post :post_feedback,
-           params:
-               { user_course_session: feedback_params , user_course_session_id: user_course_session.id}
+         params:
+           { user_course_session: feedback_params , user_course_session_id: user_course_session.id}
 
       expect(response).to be_success
     end
