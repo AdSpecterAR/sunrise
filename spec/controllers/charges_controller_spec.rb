@@ -3,23 +3,28 @@ require 'rails_helper'
 RSpec.describe ChargesController, type: :controller do
 
   let!(:user) { create(:user) }
-  let!(:plan) { create(:plan) }
+  let!(:plan) { create(:plan, user: user) }
 
-  let(:stripe_params) do
+  let!(:stripe_params) do
     {
       user_id: user.id,
       stripeToken: 'tok_ca',
       amount: 500,
       description: 'charge',
-      currency: 'usd'
+      currency: 'usd',
+      trial_period_days: 14
     }
   end
 
-  let(:subscribe_params) do
+  let!(:stripe_plan) do
+    Stripe::Plan.retrieve(plan.stripe_plan_id)
+  end
+
+  let!(:subscribe_params) do
     {
-        user_id: user.id,
-        plan_id: plan.id,
-        trial_subscription_days: 14
+      user_id: user.id,
+      plan_id: stripe_plan.id,
+      trial_subscription_days: 14
     }
   end
 
@@ -39,6 +44,7 @@ RSpec.describe ChargesController, type: :controller do
       user.update(stripe_customer_id: nil)
       post :create, params: { charge: stripe_params }, format: :as_json
 
+      # create
       expect(response).to be_success
       user.reload
       @customer_id = user.stripe_customer_id
@@ -61,8 +67,8 @@ RSpec.describe ChargesController, type: :controller do
       expect(response_json).to have_key :stripe
       expect(response_json[:stripe]).to have_key :customer
       expect(response_json[:stripe][:customer]).to eql user.stripe_customer_id
-      expect(response_json[:stripe]).to have_key :items
-      expect(response_json[:stripe][:items]).to have_key :plan
+      expect(response_json[:stripe]).to have_key :plan
+      expect(response_json[:stripe][:plan][:id]).to eql plan.stripe_plan_id
     end
   end
 

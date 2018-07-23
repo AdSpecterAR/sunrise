@@ -5,6 +5,12 @@ FactoryBot.define do
     username { first_name + last_name }
     email { Faker::Internet.email }
     password { 'password1' }
+
+    # Test customer on our Stripe account, tied to
+    # the #stripe_plan_id on the Plan factory.
+    # Don't change unless we change the test
+    # value on the account.
+    stripe_customer_id 'cus_DHSG4kXuZRItnC'
   end
 
   trait :instructor do
