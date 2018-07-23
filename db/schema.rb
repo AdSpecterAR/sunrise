@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180723183300) do
+ActiveRecord::Schema.define(version: 20180723182858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,18 +35,6 @@ ActiveRecord::Schema.define(version: 20180723183300) do
     t.datetime "updated_at", null: false
     t.bigint "instructor_id"
     t.index ["instructor_id"], name: "index_courses_on_instructor_id"
-  end
-
-  create_table "plans", force: :cascade do |t|
-    t.string "name"
-    t.string "stripe_plan_id"
-    t.string "interval"
-    t.boolean "available"
-    t.boolean "active"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
   create_table "user_course_sessions", force: :cascade do |t|
@@ -83,6 +71,7 @@ ActiveRecord::Schema.define(version: 20180723183300) do
     t.string "fb_user_id"
     t.boolean "fb_account"
     t.string "stripe_customer_id"
+    t.string "stripe_subscription_id"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -90,6 +79,5 @@ ActiveRecord::Schema.define(version: 20180723183300) do
 
   add_foreign_key "course_sessions", "courses"
   add_foreign_key "courses", "users", column: "instructor_id"
-  add_foreign_key "plans", "users"
   add_foreign_key "user_course_sessions", "users", column: "student_id"
 end
