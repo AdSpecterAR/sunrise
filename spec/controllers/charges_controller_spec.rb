@@ -12,7 +12,7 @@ RSpec.describe ChargesController, type: :controller do
       amount: 500,
       description: 'charge',
       currency: 'usd',
-      trial_period_days: 14
+     # trial_period_days: 14
     }
   end
 
@@ -24,6 +24,7 @@ RSpec.describe ChargesController, type: :controller do
     {
       user_id: user.id,
       plan_id: stripe_plan.id,
+      stripeToken: 'tok_ca',
       trial_subscription_days: 14
     }
   end
@@ -59,8 +60,10 @@ RSpec.describe ChargesController, type: :controller do
 
   describe 'subscribe' do
     it "returns a subscription" do
+      user.update(stripe_customer_id: nil) #had to put this line in because out test customer hit max subsriptions
       post :subscribe, params: { subscription: subscribe_params }, format: :as_json
-
+      user.reload
+      expect(user.stripe_customer_id).not_to be_nil
       expect(response).to be_success
       response_json = parsed_response_json(response)
 
@@ -69,6 +72,21 @@ RSpec.describe ChargesController, type: :controller do
       expect(response_json[:stripe][:customer]).to eql user.stripe_customer_id
       expect(response_json[:stripe]).to have_key :plan
       expect(response_json[:stripe][:plan][:id]).to eql plan.stripe_plan_id
+    end
+
+    it "doesn't update stripe customer id if user already has one" do
+      user.update(stripe_customer_id: nil)
+      post :subscribe, params: { subscription: subscribe_params }, format: :as_json
+
+      expect(response).to be_success
+      user.reload
+      @customer_id = user.stripe_customer_id
+      expect(@customer_id).not_to be_nil
+
+      post :subscribe, params: { subscription: subscribe_params }, format: :as_json
+
+      user.reload
+      expect(user.stripe_customer_id).to eql @customer_id
     end
   end
 

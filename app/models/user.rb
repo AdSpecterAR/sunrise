@@ -50,6 +50,22 @@ class User < ApplicationRecord
   end
 
 
+  #returns customer id
+  def find_or_create_customer(stripeToken)
+    if self.stripe_customer_id.nil?
+      #create new customer
+      customer = Stripe::Customer.create(
+                source: stripeToken
+            )
+
+      self.update(stripe_customer_id: customer.id)
+      customer.id
+            # save the customer id in user table
+    else
+      self.stripe_customer_id
+    end
+  end
+
   private
 
 

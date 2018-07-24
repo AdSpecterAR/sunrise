@@ -8,20 +8,9 @@ class ChargesController < ApplicationController
     @amount = stripe_params[:amount]
     @user = User.find_by_id(stripe_params[:user_id])
 
-    @customer_id = @user.stripe_customer_id
+    @customer_id = @user.find_or_create_customer(stripe_params[:stripeToken])
 
-    #if the customer doesn't already have stripe id, create a new stripe customer
-    if @customer_id.nil?
-      customer = Stripe::Customer.create(
-          :source  => stripe_params[:stripeToken]
-      )
-
-      @customer_id = customer.id
-      #save the customer id in user table
-      # TODO: move this out of controller and into a model method
-      @user.update(stripe_customer_id: @customer_id)
-    end
-
+    @user.reload
     charge = Stripe::Charge.create(
         :customer    => @customer_id,
         :amount      => @amount,
@@ -37,6 +26,7 @@ class ChargesController < ApplicationController
 
   def subscribe
     @user = User.find_by_id(subscribe_params[:user_id])
+=begin
     @customer_id = @user.stripe_customer_id
 
     #if the customer doesn't already have stripe id, create a new stripe customer
@@ -50,6 +40,9 @@ class ChargesController < ApplicationController
       # TODO: move this out of controller and into a model method
       @user.update(stripe_customer_id: @customer_id)
     end
+=end
+
+    @customer_id = @user.find_or_create_customer(subscribe_params[:stripeToken])
 
     subscription = Stripe::Subscription.create(
                                           customer: @customer_id,
@@ -86,6 +79,7 @@ class ChargesController < ApplicationController
     .permit(
         :user_id,
         :plan_id,
+        :stripeToken,
         :trial_subscription_days
     )
   end
