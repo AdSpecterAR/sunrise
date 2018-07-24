@@ -25,5 +25,7 @@ Rails.application.routes.draw do
        as: :post_feedback
 
   post "/subscribe" => "charges#subscribe", as: :subscribe
+
+  post "/cancel_subscription" => "charges#cancel_subscription"
   
 end

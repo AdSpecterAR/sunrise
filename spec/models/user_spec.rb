@@ -56,4 +56,23 @@ describe User, type: :model do
     end
 
   end
+
+  describe 'add_subscription' do
+    it "should add subsctiption id to user table" do
+      user.update(stripe_subscription_id: nil)
+      expect(user.stripe_subscription_id).to be_nil
+      user.add_subscription("sub_DHjbbsYn8jxp1H")
+      expect(user.stripe_subscription_id).not_to be_nil
+    end
+  end
+
+  describe 'cancel_subscription' do
+    it "removes stripe subsciption id" do
+
+      user.add_subscription("sub_DHjbbsYn8jxp1H")
+      expect(user.stripe_subscription_id).not_to be_nil
+      user.cancel_subscription
+      expect(user.stripe_subscription_id).to be_nil
+    end
+  end
 end
