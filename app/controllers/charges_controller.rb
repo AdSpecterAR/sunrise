@@ -26,21 +26,6 @@ class ChargesController < ApplicationController
 
   def subscribe
     @user = User.find_by_id(subscribe_params[:user_id])
-=begin
-    @customer_id = @user.stripe_customer_id
-
-    #if the customer doesn't already have stripe id, create a new stripe customer
-    if @customer_id.nil?
-      customer = Stripe::Customer.create(
-          :source  => subscribe_params[:stripeToken]
-      )
-
-      @customer_id = customer.id
-      #save the customer id in user table
-      # TODO: move this out of controller and into a model method
-      @user.update(stripe_customer_id: @customer_id)
-    end
-=end
 
     @customer_id = @user.find_or_create_customer(subscribe_params[:stripeToken])
 
