@@ -8,7 +8,7 @@ class ChargesController < ApplicationController
     @amount = charge_params[:amount]
     @user = User.find_by_id(charge_params[:user_id])
 
-    @customer_id = @user.find_or_create_customer(charge_params[:stripeToken])
+    @customer_id = @user.find_or_create_stripe_customer(charge_params[:stripeToken])
 
     @user.reload
     charge = Stripe::Charge.create(
@@ -27,7 +27,7 @@ class ChargesController < ApplicationController
   def subscribe
     @user = User.find_by_id(subscribe_params[:user_id])
 
-    @customer_id = @user.find_or_create_customer(subscribe_params[:stripeToken])
+    @customer_id = @user.find_or_create_stripe_customer(subscribe_params[:stripeToken])
 
     subscription = Stripe::Subscription.create(
                                           customer: @customer_id,
@@ -50,7 +50,7 @@ class ChargesController < ApplicationController
     #subscription = Stripe::Subscription.retrieve()
 
     subscription = @user.cancel_subscription
-    
+
     render json: { stripe: subscription }
   end
 

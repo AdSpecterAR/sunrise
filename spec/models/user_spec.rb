@@ -40,18 +40,18 @@ describe User, type: :model do
     it "should return a new customer if user has no customer" do
       user.update(stripe_customer_id: nil)
       expect(user.stripe_customer_id).to be_nil
-      user.find_or_create_customer('tok_ca')
+      user.find_or_create_stripe_customer('tok_ca')
       expect(user.stripe_customer_id).not_to be_nil
     end
 
     it "should return the same customer if user already has one" do
       user.update(stripe_customer_id: nil)
       expect(user.stripe_customer_id).to be_nil
-      user.find_or_create_customer('tok_ca')
+      user.find_or_create_stripe_customer('tok_ca')
       expect(user.stripe_customer_id).not_to be_nil
 
       @customer_id = user.stripe_customer_id
-      user.find_or_create_customer('tok_ca')
+      user.find_or_create_stripe_customer('tok_ca')
       expect(user.stripe_customer_id).to eql @customer_id
     end
 
