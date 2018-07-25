@@ -79,7 +79,6 @@ RSpec.describe ChargesController, type: :controller do
       expect(response_json[:stripe]).to have_key :plan
       expect(response_json[:stripe][:plan][:id]).to eql plan.stripe_plan_id
       expect(user.plan).not_to be_nil
-      #expect(response_json[:stripe][:trial_period_days]).to eql subscribe_params[:trial_period_days]
     end
 
     it "doesn't update stripe customer id if user already has one" do
@@ -108,7 +107,6 @@ RSpec.describe ChargesController, type: :controller do
       response_json = parsed_response_json(response)
       expect(user.stripe_subscription_id).to eql response_json[:stripe][:id]
       expect(user.plan).not_to be_nil
-
     end
     #TODO: what should u do if you add a sub but you already have one?
   end
