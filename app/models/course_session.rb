@@ -8,7 +8,7 @@ class CourseSession < ApplicationRecord
 
   ### VALIDATIONS ###
 
-  validates :start_time, presence: true
+  validates :start_time, :duration, presence: true
 
   class << self
     def courses_in_next_24_hours

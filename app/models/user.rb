@@ -50,6 +50,38 @@ class User < ApplicationRecord
   end
 
 
+  #returns customer id
+  def find_or_create_stripe_customer(stripeToken)
+    if self.stripe_customer_id.nil?
+      #create new customer
+      customer = Stripe::Customer.create(
+                source: stripeToken
+            )
+
+      self.update(stripe_customer_id: customer.id)
+      customer.id
+            # save the customer id in user table
+    else
+      self.stripe_customer_id
+    end
+  end
+
+  def add_subscription(subscription_id)
+    self.update(stripe_subscription_id: subscription_id)
+  end
+
+#Response body: { stripe: Stripe_subscription_response }
+  # cancel removes the subscription from the user table, but does not remove subsctiption on stripes end
+  def cancel_subscription
+    subscription = Stripe::Subscription.retrieve(stripe_subscription_id)
+    transaction do
+      subscription.delete(at_period_end: true)
+      self.update(stripe_subscription_id: nil)
+    end
+
+    subscription
+  end
+
   private
 
 
