@@ -7,4 +7,16 @@ class CourseSessionsController < ApplicationController
     render json: { courses: course_sessions_json }
   end
 
+  def get_students
+
+    user_course_sessions = UserCourseSession
+        .where(course_session_id: params[:course_session_id])
+
+    users = user_course_sessions
+                .map { |user_course_session| user_course_session.return_student_name }
+    #render json: { user_course_session: UserCourseSessionRepresenter.new(@user_course_session) }
+    render json: { user: users }
+
+  end
+
 end

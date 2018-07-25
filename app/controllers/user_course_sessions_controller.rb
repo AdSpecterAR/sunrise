@@ -21,6 +21,8 @@ class UserCourseSessionsController < ApplicationController
     # @user_course_session.add_feedback(params[:rating], params[:comment])
   end
 
+
+
   def feedback_params
     params
       .require(:user_course_session)
