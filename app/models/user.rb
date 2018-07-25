@@ -66,8 +66,11 @@ class User < ApplicationRecord
     end
   end
 
-  def add_subscription(subscription_id)
+  def add_subscription(subscription_id) #TODO: use find by stripe plan id to find the right plan in Plans
+    subscription = Stripe::Subscription.retrieve(subscription_id)
+    plan = Plan.find_by(stripe_plan_id: subscription.plan.id)
     self.update(stripe_subscription_id: subscription_id)
+    self.update(plan: plan)
   end
 
 #Response body: { stripe: Stripe_subscription_response }
@@ -77,6 +80,7 @@ class User < ApplicationRecord
     transaction do
       subscription.delete(at_period_end: true)
       self.update(stripe_subscription_id: nil)
+      self.plan.update(user_id: nil)
     end
 
     subscription

@@ -78,6 +78,7 @@ RSpec.describe ChargesController, type: :controller do
       expect(response_json[:stripe][:customer]).to eql user.stripe_customer_id
       expect(response_json[:stripe]).to have_key :plan
       expect(response_json[:stripe][:plan][:id]).to eql plan.stripe_plan_id
+      expect(user.plan).not_to be_nil
       #expect(response_json[:stripe][:trial_period_days]).to eql subscribe_params[:trial_period_days]
     end
 
@@ -106,6 +107,7 @@ RSpec.describe ChargesController, type: :controller do
       expect(response).to be_success
       response_json = parsed_response_json(response)
       expect(user.stripe_subscription_id).to eql response_json[:stripe][:id]
+      expect(user.plan).not_to be_nil
 
     end
     #TODO: what should u do if you add a sub but you already have one?
@@ -133,6 +135,7 @@ RSpec.describe ChargesController, type: :controller do
       post :cancel_subscription, params: { subscription: cancel_params }, format: :as_json
       user.reload
       expect(user.stripe_subscription_id).to be_nil
+      expect(user.plan).to be_nil
     end
   end
 
