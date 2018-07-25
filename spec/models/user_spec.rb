@@ -74,5 +74,16 @@ describe User, type: :model do
       user.cancel_subscription
       expect(user.stripe_subscription_id).to be_nil
     end
+
+    it "doesn't update if it's not canceled on stripes end" do
+      user.add_subscription("sub_DHjbbsYn8jxp1H")
+      expect(user.stripe_subscription_id).not_to be_nil
+      @subscription = Stripe::Subscription.retrieve("sub_DHjbbsYn8jxp1H")
+      @subscription.delete
+
+      user.cancel_subscription
+
+      expect(user.stripe_subscription_id).not_to be_nil
+    end
   end
 end

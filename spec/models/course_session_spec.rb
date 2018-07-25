@@ -19,6 +19,13 @@ RSpec.describe CourseSession, type: :model do
 
       expect(course_session1).not_to be_valid
     end
+
+    it "is valid without a duration" do
+      course_session1.update(duration: nil)
+
+      expect(course_session1).to be_valid
+    end
+
   end
 
   describe 'associations' do
