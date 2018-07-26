@@ -76,7 +76,9 @@ class ChargesController < ApplicationController
       :user_id,
       :plan_id,
       :stripeToken,
-      :trial_period_days
+      :trial_period_days,
+      :amount,
+      :currency
     )
   end
 
