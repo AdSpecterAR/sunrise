@@ -45,4 +45,10 @@ RSpec.describe UserCourseSession, type: :model do
       expect(user_course_session.rating).not_to eql 'bad'
     end
   end
+
+  describe "return student name" do
+    it "returns students full name" do
+      expect(user_course_session.return_student_name).to eql student.full_name
+    end
+  end
 end
