@@ -13,7 +13,6 @@ class UserCourseSessionRepresenter < Representable::Decorator
   property :course_difficulty
   property :course_description
   property :course_equipment
-  #property :course_session, decorator: CourseSessionRepresenter
   property :course_session
   property :student
   property :created_at
