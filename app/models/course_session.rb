@@ -29,5 +29,10 @@ class CourseSession < ApplicationRecord
   def instructor_full_name
     "#{course.instructor.first_name} #{course.instructor.last_name}"
   end
+
+  def all_participants
+    user_course_sessions = self.user_course_sessions
+    user_course_sessions.map { |u| u.student_full_name }
+  end
 end
 

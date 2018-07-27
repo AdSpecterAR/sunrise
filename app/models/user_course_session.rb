@@ -33,9 +33,8 @@ class UserCourseSession < ApplicationRecord
     self.comment = comment
   end
 
-  def return_student_name
-    @student = User.find_by_id(self.student_id)
-    @student.full_name
+  def student_full_name
+    student.full_name
   end
 
   def course_name
