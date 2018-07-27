@@ -27,7 +27,9 @@ yogaClass = Course.create(
   duration: 45,
   category: 'yoga',
   difficulty: 'beginner',
-  instructor_id: jessica.id
+  instructor_id: jessica.id,
+  description: 'stretch with jess!',
+  equipment: 'yoga mat'
 )
 
 hiitClass = Course.create(
@@ -35,7 +37,9 @@ hiitClass = Course.create(
   duration: 30,
   category: 'hiit',
   difficulty: 'intermediate',
-  instructor_id: jessica.id
+  instructor_id: jessica.id,
+  description: 'sweat with jess!',
+  equipment: 'a good attitude!'
 )
 
 CourseSession.create(

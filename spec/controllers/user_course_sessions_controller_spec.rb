@@ -27,11 +27,13 @@ RSpec.describe UserCourseSessionsController, type: :controller do
     it "respresents everything up to course layer in json" do
       post :get_user_course_session, params: { user_id: student.id, course_session_id: course_session.id }, format: :as_json
       response_json = parsed_response_json(response)
-
       expect(response_json).to have_key :user_course_session
       expect(response_json[:user_course_session]).to have_key :course_session
-      expect(response_json[:user_course_session][:course_session]).to have_key :course
-      expect(response_json[:user_course_session][:course_session][:course]).to have_key :name
+      expect(response_json[:user_course_session]).to have_key :course_name
+      expect(response_json[:user_course_session]).to have_key :course_difficulty
+      expect(response_json[:user_course_session]).to have_key :course_description
+      expect(response_json[:user_course_session]).to have_key :course_equipment
+      expect(response_json[:user_course_session]).to have_key :course_category
     end
   end
 
