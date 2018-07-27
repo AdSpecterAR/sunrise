@@ -45,7 +45,7 @@ hiitClass = Course.create(
 CourseSession.create(
   start_time: 2.days.from_now,
   duration: 30,
-  video_url: 'https://www.youtube.com/watch?v=FiPkYIH1vnw',
+  video_url: 'https://www.youtube.com/embed/LsBrT6vbQa8',
   thumbnail_image_url: '',
   course_id: yogaClass.id
 )
@@ -53,7 +53,7 @@ CourseSession.create(
 CourseSession.create(
   start_time: 1.day.from_now,
   duration: 45,
-  video_url: 'https://www.youtube.com/watch?v=FiPkYIH1vnw',
+  video_url: 'https://www.youtube.com/embed/es2Ha1oKkgY',
   thumbnail_image_url: '',
   course_id: hiitClass.id
 )
