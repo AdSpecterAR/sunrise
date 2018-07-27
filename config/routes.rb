@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   ### USERS ###
 
+  root 'course_sessions#upcoming_courses'
   post "/register_new_user" => "users#create", as: :create
 
   post "/facebook_authentication" => "users#facebook_authentication", as: :facebook_authentication
