@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe CourseSession, type: :model do
   let(:instructor) { create(:user, :instructor) }
+  let(:student1) { create(:user) }
+  let(:student2) { create(:user) }
+  let(:student3) { create(:user) }
   let(:course) { create(:course, instructor: instructor) }
   let!(:course_session1) { create(:course_session, course: course, start_time: Time.now, duration: 45) }
   let!(:course_session2) { create(:course_session, course: course, start_time: 59.minutes.ago) }
@@ -63,6 +66,13 @@ RSpec.describe CourseSession, type: :model do
   describe 'instructor_name' do
     it "returns the correct instructor full name" do
       expect(course_session1.instructor_full_name).to eql "#{instructor.first_name} #{instructor.last_name}"
+    end
+  end
+
+  describe 'all_participants' do
+    it "correctly returns the full names of all participants" do
+      expect(course_session1.all_participants.size).to eql 2
+      expect(course_session1.all_participants).to match_array [student1.full_name, student2.full_name]
     end
   end
 end

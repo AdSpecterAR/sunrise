@@ -26,10 +26,10 @@ RSpec.describe CourseSessionsController, type: :controller do
       expect(response).to be_success
       response_json = parsed_response_json(response)
       expect(response_json).to have_key :participants
+      expect(response_json[:participants].size).to eql 2
       expect(response_json[:participants]).to contain_exactly(student.full_name, student2.full_name)
     end
   end
-
 
 end
 

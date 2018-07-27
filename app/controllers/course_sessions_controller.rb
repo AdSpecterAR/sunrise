@@ -8,13 +8,9 @@ class CourseSessionsController < ApplicationController
   end
 
   def get_students
-    user_course_sessions = UserCourseSession
-        .where(course_session_id: params[:course_session_id])
+    @course_session = CourseSession.find(params[:course_session_id])
 
-    users = user_course_sessions
-                .map { |user_course_session| user_course_session.return_student_name }
-
-    render json: { participants: users }
+    render json: { participants: @course_session.all_participants }
   end
 
 end
