@@ -38,4 +38,24 @@ class UserCourseSession < ApplicationRecord
     @student.full_name
   end
 
+  def course_name
+    course_session.course.name
+  end
+
+  def course_category
+    course_session.course.category
+  end
+
+  def course_difficulty
+    course_session.course.difficulty
+  end
+
+  def course_description
+    course_session.course.description
+  end
+
+  def course_equipment
+    course_session.course.equipment
+  end
+
 end
