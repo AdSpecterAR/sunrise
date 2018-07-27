@@ -18,7 +18,7 @@ class ChargesController < ApplicationController
         :description => charge_params[:description]
     )
 
-    render json: { message: 'Successful charge!' }
+    render json: { stripe: charge }
 
     rescue Stripe::CardError => e
       render json: { message: 'ERROR' }, status: 422
@@ -29,6 +29,8 @@ class ChargesController < ApplicationController
 
     @customer_id = @user.find_or_create_stripe_customer(subscribe_params[:stripeToken])
 
+    # add check to see if subscription already exists
+    # add associated plan to user
     subscription = Stripe::Subscription.create(
                                           customer: @customer_id,
                                           items: [
@@ -42,7 +44,6 @@ class ChargesController < ApplicationController
     @user.add_subscription(subscription.id)
     #TODO: add the stripe subscription id to user
     render json: {stripe: subscription }
-
   end
   #TODO: should we specify which plan
   def cancel_subscription
