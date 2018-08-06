@@ -57,4 +57,7 @@ class UserCourseSession < ApplicationRecord
     course_session.course.equipment
   end
 
+  def course_thumbnail_image_url
+    course_session.thumbnail_image_url
+  end
 end

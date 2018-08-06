@@ -77,6 +77,7 @@ class User < ApplicationRecord
   # cancel removes the subscription from the user table, but does not remove subsctiption on stripes end
   def cancel_subscription
     subscription = Stripe::Subscription.retrieve(stripe_subscription_id)
+
     transaction do
       subscription.delete(at_period_end: true)
       self.update(stripe_subscription_id: nil)
