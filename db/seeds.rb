@@ -51,7 +51,7 @@ CourseSession.create(
 )
 
 CourseSession.create(
-  start_time: 1.day.from_now,
+  start_time: 12.hours.from_now,
   duration: 45,
   video_url: 'https://www.youtube.com/embed/es2Ha1oKkgY',
   thumbnail_image_url: '',

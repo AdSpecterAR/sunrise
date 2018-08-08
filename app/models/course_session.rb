@@ -16,6 +16,12 @@ class CourseSession < ApplicationRecord
         .where(start_time: 1.hour.ago..24.hours.from_now)
         .sort_by { |course_session| course_session.start_time }
     end
+
+    def courses_in_next_week
+      CourseSession
+          .where(start_time: 1.hour.ago..1.week.from_now)
+          .sort_by { |course_session| course_session.start_time }
+    end
   end
 
   def duration

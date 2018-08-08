@@ -9,8 +9,8 @@ RSpec.describe CourseSession, type: :model do
   let!(:course_session1) { create(:course_session, course: course, start_time: Time.now, duration: 45) }
   let!(:course_session2) { create(:course_session, course: course, start_time: 59.minutes.ago) }
   let!(:course_session3) { create(:course_session, course: course, start_time: 2.hours.from_now) }
-  let!(:course_session4) { create(:course_session, course: course, start_time: 4.hours.ago) }
-  let!(:course_session5) { create(:course_session, course: course, start_time: 25.hours.from_now) }
+  let!(:course_session4) { create(:course_session, course: course, start_time: 4.days.ago) }
+  let!(:course_session5) { create(:course_session, course: course, start_time: 8.days.from_now) }
   let!(:user_course_session1) { create(:user_course_session, student: student1, course_session: course_session1) }
   let!(:user_course_session2) { create(:user_course_session, student: student2, course_session: course_session1) }
 
@@ -41,9 +41,9 @@ RSpec.describe CourseSession, type: :model do
     end
   end
 
-  describe 'courses_in_next_24_hours' do
+  describe 'courses_in_next_week' do
     it "correctly return all valid course sessions in the specified time period" do
-      expect(CourseSession.courses_in_next_24_hours).to match_array [course_session1, course_session2, course_session3]
+      expect(CourseSession.courses_in_next_week).to match_array [course_session1, course_session2, course_session3]
     end
 
     it "returns array sorted by start_time" do
