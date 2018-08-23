@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
@@ -30,4 +32,5 @@ Rails.application.routes.draw do
 
   get "/course_sessions/:course_session_id/users" => "course_sessions#get_students",
       as: :get_students
+
 end

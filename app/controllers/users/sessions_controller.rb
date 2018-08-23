@@ -5,7 +5,8 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   # def new
-  #   supe
+  #   self.resource = resource_class.new(sign_in_params)
+  #   store_location_for(resource, params[:redirect_to])
   # end
 
   # POST /resource/sign_in

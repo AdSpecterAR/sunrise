@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      flash[:success] = "You made a user"
       render json: { user: UserRepresenter.represent(@user) }
     else
       render json: { error: "error" }, status: 422
