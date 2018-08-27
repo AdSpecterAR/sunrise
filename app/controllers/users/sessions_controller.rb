@@ -10,11 +10,17 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
+    #super excecutes the devise create method
+    puts 'super'
+    super
+    puts '0'
     @user = User.where(email: params[:email]).first
-
+puts '1'
     if @user&.valid_password?(params[:password])
+      puts '2'
       render json: { user: UserRepresenter.represent(@user) }
     else
+      puts '3'
       head(:unauthorized)
     end
   end

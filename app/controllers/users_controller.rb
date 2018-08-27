@@ -3,6 +3,10 @@ require 'securerandom'
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:create, :facebook_authentication]
 
+  def get_current
+    render json: { user: current_user}
+  end
+
   def create
     @user = User.new(user_params)
 

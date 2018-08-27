@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   root 'course_sessions#upcoming_courses'
   post "/register_new_user" => "users#create", as: :create
 
+  get "/current" => "users#get_current"
+
   post "/facebook_authentication" => "users#facebook_authentication", as: :facebook_authentication
 
   get "/upcoming_courses" => "course_sessions#upcoming_courses"
