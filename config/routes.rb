@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   post "/facebook_authentication" => "users#facebook_authentication", as: :facebook_authentication
 
+  get "/get_instructors" => "users#get_instructors"
   get "/upcoming_courses" => "course_sessions#upcoming_courses"
   get "/users/:user_id/course_sessions/:course_session_id" => "user_course_sessions#get_user_course_session",
       as: :get_user_course_session

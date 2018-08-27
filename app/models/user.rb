@@ -42,6 +42,11 @@ class User < ApplicationRecord
     payload['sub']
   end
 
+  def self.instructors
+    User
+        .where(instructor: true)
+  end
+
 
   ### INSTANCE_METHODS ###
 

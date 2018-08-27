@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe User, type: :model do
   let(:user) { create(:user, :instructor) }
-
+  let(:administrator) { create(:user, :admin) }
+  let(:student) { create(:user, :student) }
 =begin
   let!(customer_params) do
     {
@@ -57,6 +58,13 @@ describe User, type: :model do
 
   end
 
+  describe 'instructors' do
+    it "should return instructors" do
+      expect(User.instructors).to match_array [user]
+    end
+  end
+
+  
   describe 'add_subscription' do
     it "should add subsctiption id to user table" do
       user.update(stripe_subscription_id: nil)
