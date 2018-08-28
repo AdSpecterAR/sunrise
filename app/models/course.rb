@@ -31,4 +31,8 @@ class Course < ApplicationRecord
   validates :difficulty, presence: true, inclusion:  { in: VALID_DIFFICULTIES }
   validates :category, presence: true, inclusion:  { in: VALID_CATEGORIES }
 
+
+  ### CLASS METHODS ###
+  #
+  ### INSTANCE METHODS ###
 end

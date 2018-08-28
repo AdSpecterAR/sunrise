@@ -1,7 +1,7 @@
 require 'securerandom'
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:get_instructors, :create, :facebook_authentication]
+  before_action :authenticate_user!, except: [:get_users, :get_instructors, :create, :facebook_authentication]
 
   def create
     @user = User.new(user_params)
@@ -15,8 +15,11 @@ class UsersController < ApplicationController
 
   def get_instructors
     @instructors = User.instructors
-    instructors_json = { instructors: UserRepresenter.for_collection.new(@instructors) }
-    render json: { users: instructors_json }
+    render json: { instructors: UserRepresenter.for_collection.new(@instructors) }
+  end
+
+  def get_users
+    render json: { users: UserRepresenter.for_collection.new(User.all) }
   end
 
   def facebook_authentication

@@ -77,6 +77,20 @@ describe UsersController, type: :controller do
   describe "get_instructors" do
     it "returns the right properties as JSON" do
       get :get_instructors, format: :json
+
+      expect(response).to be_success
+      response_json = parsed_response_json(response)
+      expect(response_json).to have_key :instructors
+    end
+  end
+
+  describe "get_users" do
+    it "returns the right properties as JSON" do
+      get :get_users, format: :json
+
+      expect(response).to be_success
+      response_json = parsed_response_json(response)
+      expect(response_json).to have_key :users
     end
   end
 

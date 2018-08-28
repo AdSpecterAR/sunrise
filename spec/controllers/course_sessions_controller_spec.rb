@@ -19,6 +19,16 @@ RSpec.describe CourseSessionsController, type: :controller do
     end
   end
 
+  describe "get_courses" do
+    it "returns the right properties as JSON" do
+      get :get_courses, format: :json
+
+      expect(response).to be_success
+      response_json = parsed_response_json(response)
+      expect(response_json).to have_key :courses
+    end
+  end
+
   describe "get users" do
     it "returns the names of the users in this course" do
       get :get_students, params: { course_session_id: course_session.id }, format: :json

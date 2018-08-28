@@ -13,4 +13,9 @@ class CourseSessionsController < ApplicationController
     render json: { participants: @course_session.all_participants }
   end
 
+  #this gets all courses
+  def get_courses
+    render json: { courses: CourseRepresenter.for_collection.new(Course.all) }
+  end
+
 end
