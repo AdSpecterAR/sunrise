@@ -62,7 +62,7 @@ describe User, type: :model do
       expect(User.instructors).to match_array [user]
     end
   end
-  
+
   describe 'add_subscription' do
     it "should add subsctiption id to user table" do
       user.update(stripe_subscription_id: nil)
