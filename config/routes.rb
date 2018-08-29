@@ -15,9 +15,9 @@ Rails.application.routes.draw do
 
   root 'course_sessions#upcoming_courses'
   post "/register_new_user" => "users#create", as: :create
-  post "/register_new_instructor" => "users#create_instructor", as: :create_instructor
-  post "/create_course" => "courses#create_course", as: :create_course
-  post "/create_course_session" => "course_sessions#create_course_session"
+  post "/admin/register_new_instructor" => "users#create_instructor", as: :create_instructor
+  post "/admin/create_course" => "courses#create_course", as: :create_course
+  post "/admin/create_course_session" => "course_sessions#create_course_session"
 
   post "/facebook_authentication" => "users#facebook_authentication", as: :facebook_authentication
 
