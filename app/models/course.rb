@@ -30,5 +30,5 @@ class Course < ApplicationRecord
   validates :name, :duration, presence: true
   validates :difficulty, presence: true, inclusion:  { in: VALID_DIFFICULTIES }
   validates :category, presence: true, inclusion:  { in: VALID_CATEGORIES }
-  
+
 end

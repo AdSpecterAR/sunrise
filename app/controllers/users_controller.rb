@@ -23,13 +23,10 @@ class UsersController < ApplicationController
     end
   end
 
+  #this returns all users with instructor: true
   def get_instructors
     @instructors = User.instructors
     render json: { instructors: UserRepresenter.for_collection.new(@instructors) }
-  end
-
-  def get_users
-    render json: { users: UserRepresenter.for_collection.new(User.all) }
   end
 
   def facebook_authentication
