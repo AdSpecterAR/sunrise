@@ -15,12 +15,15 @@ Rails.application.routes.draw do
 
   root 'course_sessions#upcoming_courses'
   post "/register_new_user" => "users#create", as: :create
+  post "/register_new_instructor" => "users#create_instructor", as: :create_instructor
+  post "/create_course" => "courses#create_course", as: :create_course
+  post "/create_course_session" => "course_sessions#create_course_session"
 
   post "/facebook_authentication" => "users#facebook_authentication", as: :facebook_authentication
 
   get "/get_instructors" => "users#get_instructors"
   get "/get_users" => "users#get_users"
-  get "/get_courses" => "course_sessions#get_courses"
+  get "/get_courses" => "courses#get_courses"
 
   get "/upcoming_courses" => "course_sessions#upcoming_courses"
   get "/users/:user_id/course_sessions/:course_session_id" => "user_course_sessions#get_user_course_session",

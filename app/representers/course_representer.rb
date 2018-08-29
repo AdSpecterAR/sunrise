@@ -8,6 +8,11 @@ class CourseRepresenter < Representable::Decorator
   property :id
   property :name
   property :duration
-  property :instructor
+  property :category
+  property :difficulty
+  property :instructor_id
+  property :description
+  property :equipment
+
 
 end
