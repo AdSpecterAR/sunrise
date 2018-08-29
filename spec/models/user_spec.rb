@@ -55,7 +55,6 @@ describe User, type: :model do
       user.find_or_create_stripe_customer('tok_ca')
       expect(user.stripe_customer_id).to eql @customer_id
     end
-
   end
 
   describe 'instructors' do
@@ -63,7 +62,6 @@ describe User, type: :model do
       expect(User.instructors).to match_array [user]
     end
   end
-
   
   describe 'add_subscription' do
     it "should add subsctiption id to user table" do

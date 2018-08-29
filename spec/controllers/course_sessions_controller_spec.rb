@@ -19,7 +19,6 @@ RSpec.describe CourseSessionsController, type: :controller do
     }
   end
 
-
   describe "create_course_sessions" do
     it "creates a course_session" do
       post :create_course_session, params: { course_session: new_course_session_params }, format: :as_json
@@ -47,8 +46,6 @@ RSpec.describe CourseSessionsController, type: :controller do
     end
   end
 
-
-
   describe "get users" do
     it "returns the names of the users in this course" do
       get :get_students, params: { course_session_id: course_session.id }, format: :json
@@ -62,4 +59,3 @@ RSpec.describe CourseSessionsController, type: :controller do
   end
 
 end
-

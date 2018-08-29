@@ -37,7 +37,6 @@ class User < ApplicationRecord
 
   ### CLASS METHODS ###
 
-
   def self.from_token_payload payload
     payload['sub']
   end
@@ -53,7 +52,6 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
-
 
   #returns customer id
   def find_or_create_stripe_customer(stripeToken)

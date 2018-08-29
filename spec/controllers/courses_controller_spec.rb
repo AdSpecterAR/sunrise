@@ -14,7 +14,6 @@ describe CoursesController, type: :controller do
     }
   end
 
-
   describe "#create" do
     it "creates a course" do
       post :create_course, params: { course: new_course_params }, format: :as_json
@@ -44,4 +43,5 @@ describe CoursesController, type: :controller do
       expect(response_json).to have_key :courses
     end
   end
+
 end

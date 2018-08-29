@@ -11,7 +11,7 @@ class CourseSessionRepresenter < Representable::Decorator
   property :video_url
   property :duration
   property :instructor_full_name
-  # property :course
+  property :course
   property :course_id
   property :live
 end

@@ -14,5 +14,4 @@ class CourseRepresenter < Representable::Decorator
   property :description
   property :equipment
 
-
 end
