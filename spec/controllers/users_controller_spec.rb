@@ -87,16 +87,6 @@ describe UsersController, type: :controller do
     end
   end
 
-  describe "get_users" do
-    it "returns the right properties as JSON" do
-      get :get_users, format: :json
-
-      expect(response).to be_success
-      response_json = parsed_response_json(response)
-      expect(response_json).to have_key :users
-    end
-  end
-
   describe "facebook" do
     it "creates a new user with facebook" do
       post :facebook_authentication, params: { user: facebook_params }, format: :as_json
