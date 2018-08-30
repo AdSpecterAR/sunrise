@@ -13,5 +13,4 @@ class CourseSessionRepresenter < Representable::Decorator
   property :instructor_full_name
   property :course
   property :course_id
-  property :live
 end

@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   post "/admin/create_course" => "courses#create_course", as: :create_course
   post "/admin/create_course_session" => "course_sessions#create_course_session"
 
+  namespace :admin do
+    resources :courses, :users, :course_sessions
+  end
   post "/facebook_authentication" => "users#facebook_authentication", as: :facebook_authentication
 
   get "/get_instructors" => "users#get_instructors"

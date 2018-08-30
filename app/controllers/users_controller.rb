@@ -1,6 +1,7 @@
 require 'securerandom'
 
 class UsersController < ApplicationController
+  # this is for devise
   before_action :authenticate_user!, except: [:get_users, :get_instructors, :create_instructor, :create, :facebook_authentication]
 
   def create
@@ -13,15 +14,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def create_instructor
-    @user = User.new(user_params)
-
-    if @user.save
-      render json: { user: UserRepresenter.represent(@user) }
-    else
-      render json: { error: "error" }, status: 422
-    end
-  end
 
   #this returns all users with instructor: true
   def get_instructors
@@ -72,7 +64,6 @@ class UsersController < ApplicationController
         :full_name,
         :email,
         :password,
-        :instructor
     )
   end
 
