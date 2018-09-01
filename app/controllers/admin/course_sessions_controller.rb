@@ -15,7 +15,7 @@ class Admin::CourseSessionsController < ApplicationController
 
   def course_session_params
     params
-      .require(:course)
+      .require(:course_session)
       .permit(
         :start_time,
         :duration,

@@ -1,7 +1,9 @@
 require 'securerandom'
 
 class UsersController < ApplicationController
-  # this is for devise
+  # :authenticate_user! is a devise helper, makes sure user is authenticated or else none of the actions in this controller will work.
+  # expect for the actions after "except"
+  # right now we don't have devise authentication so all the actions are in "except"
   before_action :authenticate_user!, except: [:get_users, :get_instructors, :create_instructor, :create, :facebook_authentication]
 
   def create

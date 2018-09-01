@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  scope :instructors, -> { where(instructor: true) }
   acts_as_token_authenticatable
 
   # Include default devise modules. Others available are:
@@ -40,12 +41,6 @@ class User < ApplicationRecord
   def self.from_token_payload payload
     payload['sub']
   end
-
-  def self.instructors
-    User
-        .where(instructor: true)
-  end
-
 
   ### INSTANCE_METHODS ###
 
