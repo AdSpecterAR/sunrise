@@ -4,7 +4,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    @user.instructor = true;
+    @user.instructor = true
 
     if @user.save
       render json: { user: UserRepresenter.represent(@user) }
