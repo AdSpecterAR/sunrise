@@ -73,7 +73,7 @@ class User < ApplicationRecord
     self.update(plan: plan)
   end
 
-#Response body: { stripe: Stripe_subscription_response }
+  #Response body: { stripe: Stripe_subscription_response }
   # cancel removes the subscription from the user table, but does not remove subsctiption on stripes end
   def cancel_subscription
     subscription = Stripe::Subscription.retrieve(stripe_subscription_id)

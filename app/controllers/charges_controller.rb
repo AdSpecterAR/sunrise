@@ -26,8 +26,12 @@ class ChargesController < ApplicationController
 
   def subscribe
     @user = User.find_by_id(subscribe_params[:user_id])
+    @stripe_token = subscribe_params[:stripeToken]
 
-    @customer_id = @user.find_or_create_stripe_customer(subscribe_params[:stripeToken])
+    @customer_id = @user.find_or_create_stripe_customer(@stripe_token)
+
+    # TODO: Check that Customer already has token to avoid duplicates
+    Stripe::Customer.update(@customer_id, { source: @stripe_token })
 
     subscription = Stripe::Subscription.create(
                                           customer: @customer_id,
@@ -41,7 +45,7 @@ class ChargesController < ApplicationController
 
     @user.add_subscription(subscription.id)
     #TODO: add the stripe subscription id to user
-    render json: {stripe: subscription }
+    render json: { stripe: subscription }
 
   end
   #TODO: should we specify which plan
