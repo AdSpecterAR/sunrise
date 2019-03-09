@@ -59,7 +59,39 @@ CourseSession.create(
 )
 
 Plan.create(
-    name: 'monthly subscription',
-    stripe_plan_id: 'gold-special',
-    interval: Plan::INTERVAL_MONTH
+  name: 'monthly subscription',
+  stripe_plan_id: 'gold-special',
+  interval: Plan::INTERVAL_MONTH
+)
+
+PostureCourse.create(
+  name: 'Desk Stretch 1',
+  duration: 10,
+  category: 'desk',
+  thumbnail_image_url: 'https://i.imgur.com/oJigReq.jpg',
+  difficulty: 'beginner'
+)
+
+PostureCourse.create(
+  name: 'Calves 1',
+  duration: 5,
+  category: 'stretching',
+  thumbnail_image_url: 'https://i.imgur.com/64H0D8z.jpg',
+  difficulty: 'beginner'
+)
+
+PostureCourse.create(
+  name: 'Hamstrings 5',
+  duration: 8,
+  category: 'stretching',
+  thumbnail_image_url: 'https://i.imgur.com/XntXG27.jpg',
+  difficulty: 'intermediate'
+)
+
+PostureCourse.create(
+  name: 'Activation - Plank',
+  duration: 5,
+  category: 'posture',
+  thumbnail_image_url: 'https://i.imgur.com/zg6E2eU.jpg',
+  difficulty: 'challenging'
 )
