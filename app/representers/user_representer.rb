@@ -14,6 +14,7 @@ class UserRepresenter < Representable::Decorator
   property :admin
   property :instructor
   property :authentication_token
+  property :firebase_uid
   property :fb_authentication_token
   property :fb_user_id
   property :fb_account

@@ -1,7 +1,6 @@
 require 'securerandom'
 
 class UsersController < ApplicationController
-  # before_action :authenticate_user!, except: [:create, :facebook_authentication]
 
   def create
     @user = User.new(user_params)
