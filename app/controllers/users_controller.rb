@@ -1,7 +1,7 @@
 require 'securerandom'
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:create, :facebook_authentication]
+  # before_action :authenticate_user!, except: [:create, :facebook_authentication]
 
   def create
     @user = User.new(user_params)
@@ -11,7 +11,16 @@ class UsersController < ApplicationController
     else
       render json: { error: "error" }, status: 422
     end
+  end
 
+  def index
+    @user = User.where("firebase_uid = ?", user_params[:firebase_uid])
+
+    if @user.save
+      render json: { user: UserRepresenter.represent(@user) }
+    else
+      render json: { error: "error" }, status: 422
+    end
   end
 
   def facebook_authentication
@@ -52,11 +61,12 @@ class UsersController < ApplicationController
     params
     .require(:user)
     .permit(
-        :first_name,
-        :last_name,
-        :full_name,
-        :email,
-        :password
+      :first_name,
+      :last_name,
+      :full_name,
+      :email,
+      :firebase_uid,
+      :password
     )
   end
 

@@ -3,8 +3,8 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  # devise :database_authenticatable, :registerable,
+  #        :recoverable, :rememberable, :trackable, :validatable
 
   ### INCLUDES ###
 
@@ -25,11 +25,6 @@ class User < ApplicationRecord
   ### VALIDATIONS ###
 
   validates :first_name, :last_name, presence: true
-  validates :email, presence: true
-  validates_format_of :email, :with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
-  # validate :password_valid
-  # validate :email_presence
-  # validate :unique_email
 
 
   ### CALLBACKS ###
