@@ -18,4 +18,5 @@ class UserRepresenter < Representable::Decorator
   property :fb_authentication_token
   property :fb_user_id
   property :fb_account
+  property :current_track, extend: TrackRepresenter
 end

@@ -19,6 +19,7 @@ class PostureCourse < ApplicationRecord
 
   ### ASSOCIATIONS ###
 
+  belongs_to :track_section
 
   ### VALIDATIONS ###
 

@@ -22,6 +22,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def select_track
+    @user = User.find(params[:user_id])
+    @track = Track.find(params[:track_id])
+
+    if @user.update(track: @track)
+      render json: { user: UserRepresenter.represent(@user) }
+    else
+      render json: { error: "error" }, status: 422
+    end
+  end
+
   def facebook_authentication
     @fb_user_id = facebook_params[:fb_user_id]
     #checks if this user already exists
