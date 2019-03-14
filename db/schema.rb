@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20190314003512) do
     t.text "description"
     t.string "image_url"
     t.string "intro_video_url"
+    t.boolean "active"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_tracks_on_user_id"
   end

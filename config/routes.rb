@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   # put "/completed_track/:id"
   # put "/completed_track_section/:id"
   # put "/completed_posture_course/:id"
+  #
+  get "/all_tracks" => "tracks#all"
 
-  post "/users/:user_id/select_track/:track_id" => "users#select_track"
+  post "/users/:user_id/select_track" => "users#select_track"
 end
