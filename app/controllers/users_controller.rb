@@ -12,21 +12,29 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    @user = User.where("firebase_uid = ?", user_params[:firebase_uid])
+  def update
+    @user = User.find(params[:id])
 
-    if @user.save
+    if @user.update(user_params)
       render json: { user: UserRepresenter.represent(@user) }
     else
       render json: { error: "error" }, status: 422
     end
   end
 
+  def index
+    @user = User.find_by(firebase_uid: params[:firebase_uid])
+
+    render json: { user: UserRepresenter.represent(@user) }
+  end
+
   def select_track
     @user = User.find(params[:user_id])
     @track = Track.find(params[:track_id])
 
-    if @user.update(track: @track)
+    @viewed_track = ViewedTrack.new(user_id: @user.id, track_id: @track.id)
+
+    if @viewed_track.save
       render json: { user: UserRepresenter.represent(@user) }
     else
       render json: { error: "error" }, status: 422
@@ -76,6 +84,7 @@ class UsersController < ApplicationController
       :full_name,
       :email,
       :firebase_uid,
+      :current_track,
       :password
     )
   end
