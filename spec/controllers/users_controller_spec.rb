@@ -71,8 +71,8 @@ describe UsersController, type: :controller do
       post :create, params: { user: bad_user_params }, format: :as_json
       expect(response).not_to be_success
     end
-
   end
+
 
   describe "facebook" do
     it "creates a new user with facebook" do

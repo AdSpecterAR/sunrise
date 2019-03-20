@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190310230743) do
+ActiveRecord::Schema.define(version: 20190314003512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,28 @@ ActiveRecord::Schema.define(version: 20190310230743) do
     t.string "gif_url"
     t.string "audio_url"
     t.string "thumbnail_image_url"
+    t.bigint "track_section_id"
+    t.index ["track_section_id"], name: "index_posture_courses_on_track_section_id"
+  end
+
+  create_table "track_sections", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "image_url"
+    t.string "intro_video_url"
+    t.integer "number"
+    t.bigint "track_id"
+    t.index ["track_id"], name: "index_track_sections_on_track_id"
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "image_url"
+    t.string "intro_video_url"
+    t.boolean "active"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
   create_table "user_course_sessions", force: :cascade do |t|
@@ -108,8 +130,41 @@ ActiveRecord::Schema.define(version: 20190310230743) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "viewed_posture_courses", force: :cascade do |t|
+    t.boolean "completed"
+    t.bigint "posture_course_id"
+    t.bigint "user_id"
+    t.index ["posture_course_id"], name: "index_viewed_posture_courses_on_posture_course_id"
+    t.index ["user_id"], name: "index_viewed_posture_courses_on_user_id"
+  end
+
+  create_table "viewed_track_sections", force: :cascade do |t|
+    t.boolean "completed"
+    t.bigint "track_section_id"
+    t.bigint "user_id"
+    t.index ["track_section_id"], name: "index_viewed_track_sections_on_track_section_id"
+    t.index ["user_id"], name: "index_viewed_track_sections_on_user_id"
+  end
+
+  create_table "viewed_tracks", force: :cascade do |t|
+    t.boolean "completed"
+    t.bigint "user_id"
+    t.bigint "track_id"
+    t.index ["track_id"], name: "index_viewed_tracks_on_track_id"
+    t.index ["user_id"], name: "index_viewed_tracks_on_user_id"
+  end
+
   add_foreign_key "course_sessions", "courses"
   add_foreign_key "courses", "users", column: "instructor_id"
   add_foreign_key "plans", "users"
+  add_foreign_key "posture_courses", "track_sections"
+  add_foreign_key "track_sections", "tracks"
+  add_foreign_key "tracks", "users"
   add_foreign_key "user_course_sessions", "users", column: "student_id"
+  add_foreign_key "viewed_posture_courses", "posture_courses"
+  add_foreign_key "viewed_posture_courses", "users"
+  add_foreign_key "viewed_track_sections", "track_sections"
+  add_foreign_key "viewed_track_sections", "users"
+  add_foreign_key "viewed_tracks", "tracks"
+  add_foreign_key "viewed_tracks", "users"
 end

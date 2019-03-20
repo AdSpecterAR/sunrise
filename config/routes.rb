@@ -36,4 +36,16 @@ Rails.application.routes.draw do
   ### POSTURE APP ###
 
   get "/courses" => "posture_courses#index"
+  #
+  # put "/viewed_track/:id"
+  # put "/viewed_track_section/:id"
+  # put "/viewed_posture_course/:id"
+  #
+  # put "/completed_track/:id"
+  # put "/completed_track_section/:id"
+  # put "/completed_posture_course/:id"
+  #
+  get "/all_tracks" => "tracks#all"
+
+  post "/users/:user_id/select_track" => "users#select_track"
 end

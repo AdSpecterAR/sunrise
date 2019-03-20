@@ -95,3 +95,6 @@ PostureCourse.create(
   thumbnail_image_url: 'https://i.imgur.com/zg6E2eU.jpg',
   difficulty: 'challenging'
 )
+
+Track.create(name: 'Posture', description: 'This is the track to improve posture', image_url: 'https://i.imgur.com/XntXG27.jpg', active: true)
+Track.create(name: 'Back Pain', description: 'This is the track to alleviate back pain', image_url: 'https://i.imgur.com/zg6E2eU.jpg', active: true)

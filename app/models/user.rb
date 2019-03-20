@@ -8,10 +8,14 @@ class User < ApplicationRecord
   ### ASSOCIATIONS ###
 
   has_one :plan
+  has_one :current_track, class_name: 'ViewedTrack' # Viewed or Regular Track?
 
   has_many :courses
   has_many :user_course_sessions
   has_many :course_sessions, through: :user_course_sessions
+  has_many :viewed_tracks
+  has_many :viewed_track_sections
+  has_many :viewed_posture_courses
 
   ### SCOPES ###
 
