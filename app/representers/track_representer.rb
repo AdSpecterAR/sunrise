@@ -10,5 +10,17 @@ class TrackRepresenter < Representable::Decorator
   property :description
   property :image_url
   property :intro_video_url
-  property :track_sections, extend: TrackSectionRepresenter
+  collection :posture_courses do
+    :id
+    :name
+    :duration
+    :category
+    :difficulty
+    :equipment
+    :description
+    :video_url
+    :gif_url
+    :audio_url
+    :thumbnail_image_url
+  end
 end

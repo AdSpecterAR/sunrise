@@ -7,8 +7,6 @@ class Track < ApplicationRecord
 
   ### ASSOCIATIONS ###
 
-  has_many :track_sections
-
 
   ### SCOPES ###
   scope :active, -> { where(active: true) }
