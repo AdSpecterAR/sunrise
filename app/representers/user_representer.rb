@@ -18,5 +18,5 @@ class UserRepresenter < Representable::Decorator
   property :fb_authentication_token
   property :fb_user_id
   property :fb_account
-  property :current_track, getter: ->(_) { current_track if current_track.present? }
+  property :current_track, decorator: TrackRepresenter, class: Track, getter: ->(_) { current_track.track if current_track.present? }
 end

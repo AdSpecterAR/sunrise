@@ -7,6 +7,7 @@ class Track < ApplicationRecord
 
   ### ASSOCIATIONS ###
 
+  has_many :posture_courses
 
   ### SCOPES ###
   scope :active, -> { where(active: true) }

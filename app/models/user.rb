@@ -34,10 +34,6 @@ class User < ApplicationRecord
     payload['sub']
   end
 
-  def current_track
-    current_track.track
-  end
-
   ### INSTANCE_METHODS ###
 
   def full_name

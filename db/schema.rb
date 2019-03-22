@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190321230338) do
+ActiveRecord::Schema.define(version: 20190322013538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20190321230338) do
     t.string "gif_url"
     t.string "audio_url"
     t.string "thumbnail_image_url"
+    t.bigint "track_id"
+    t.index ["track_id"], name: "index_posture_courses_on_track_id"
   end
 
   create_table "tracks", force: :cascade do |t|
@@ -137,6 +139,7 @@ ActiveRecord::Schema.define(version: 20190321230338) do
   add_foreign_key "course_sessions", "courses"
   add_foreign_key "courses", "users", column: "instructor_id"
   add_foreign_key "plans", "users"
+  add_foreign_key "posture_courses", "tracks"
   add_foreign_key "tracks", "users"
   add_foreign_key "user_course_sessions", "users", column: "student_id"
   add_foreign_key "viewed_posture_courses", "posture_courses"
