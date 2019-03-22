@@ -19,6 +19,8 @@ class PostureCourse < ApplicationRecord
 
   ### ASSOCIATIONS ###
 
+  belongs_to :track
+
   ### VALIDATIONS ###
 
   validates :name, :duration, presence: true
