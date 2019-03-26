@@ -9,6 +9,9 @@ class Track < ApplicationRecord
 
   has_many :posture_courses
 
+  has_many :viewed_tracks
+  has_many :users, through: :viewed_tracks
+
   ### SCOPES ###
   scope :active, -> { where(active: true) }
 
@@ -21,5 +24,6 @@ class Track < ApplicationRecord
 
 
   ### CLASS METHODS ###
+
 
 end

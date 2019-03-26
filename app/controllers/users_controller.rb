@@ -28,6 +28,30 @@ class UsersController < ApplicationController
     render json: { user: UserRepresenter.represent(@user) }
   end
 
+  def viewed_course
+    @user = User.find(params[:user_id])
+
+    if @user.find_or_create_viewed_course(params[:course_id])
+      render json: { user: UserRepresenter.represent(@user) }
+    else
+      render json: { error: "error" }, status: 422
+    end
+  end
+
+  def complete_course
+    @user = User.find(params[:user_id])
+    @viewed_posture_course = ViewedPostureCourse.find_by(
+                                                  posture_course_id: params[:course_id],
+                                                  user: @user
+                                                )
+
+    if @viewed_posture_course.update(completed: true)
+      render json: { user: UserRepresenter.represent(@user) }
+    else
+      render json: { error: "error" }, status: 422
+    end
+  end
+
   def select_track
     @user = User.find(params[:user_id])
     @track = Track.find(params[:track_id])
