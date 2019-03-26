@@ -24,13 +24,9 @@ class ViewedTrack < ApplicationRecord
 
 
   def viewed_courses
-    result = self.user.viewed_posture_courses.select do |v|
+    self.user.viewed_posture_courses.select do |v|
       v.posture_course.track.id == self.track.id
     end
-
-    puts 'hi'
-
-    result
   end
 
   def completed_courses

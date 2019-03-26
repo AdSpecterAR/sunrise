@@ -43,10 +43,6 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def viewed_courses_ids
-
-  end
-
   #returns customer id
   def find_or_create_stripe_customer(stripeToken)
     if self.stripe_customer_id.nil?
@@ -64,7 +60,12 @@ class User < ApplicationRecord
   end
 
   def find_or_create_viewed_course(course_id)
-    self.viewed_posture_courses.find_or_create_by(user_id: self.id, posture_course_id: course_id)
+    self
+      .viewed_posture_courses
+      .find_or_create_by(
+        user_id: self.id,
+        posture_course_id: course_id
+      )
   end
 
   def add_subscription(subscription_id)

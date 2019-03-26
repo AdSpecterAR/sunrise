@@ -113,15 +113,6 @@ class UsersController < ApplicationController
     )
   end
 
-  def viewed_course_params
-    params
-      .require(:viewed_course)
-      .permit(
-        :user_id,
-        :course_id
-      )
-  end
-
   def facebook_params
     params
       .require(:user)
