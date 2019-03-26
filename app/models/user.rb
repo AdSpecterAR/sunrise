@@ -8,13 +8,16 @@ class User < ApplicationRecord
   ### ASSOCIATIONS ###
 
   has_one :plan
-  has_one :current_track, class_name: 'ViewedTrack' # Viewed or Regular Track?
+  has_one :current_track, class_name: 'ViewedTrack'
 
-  has_many :courses
-  has_many :user_course_sessions
-  has_many :course_sessions, through: :user_course_sessions
   has_many :viewed_tracks
   has_many :viewed_posture_courses
+
+  has_many :tracks, through: :viewed_tracks
+  has_many :posture_courses, through: :viewed_posture_courses
+  # has_many :user_course_sessions
+  # has_many :course_sessions, through: :user_course_sessions
+
 
   ### SCOPES ###
 
@@ -40,6 +43,9 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def viewed_courses_ids
+
+  end
 
   #returns customer id
   def find_or_create_stripe_customer(stripeToken)
@@ -55,6 +61,10 @@ class User < ApplicationRecord
     else
       self.stripe_customer_id
     end
+  end
+
+  def find_or_create_viewed_course(course_id)
+    self.viewed_posture_courses.find_or_create_by(user_id: self.id, posture_course_id: course_id)
   end
 
   def add_subscription(subscription_id)

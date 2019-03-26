@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   ### USERS ###
 
-  root 'course_sessions#upcoming_courses'
+  root "course_sessions#upcoming_courses"
   post "/register_new_user" => "users#create", as: :create
   get "/fetch_user/:firebase_uid" => "users#index"
 
@@ -46,4 +46,6 @@ Rails.application.routes.draw do
   get "/all_tracks" => "tracks#all"
 
   post "/users/:user_id/select_track" => "users#select_track"
+  post "/users/:user_id/viewed_course/:course_id" => "users#viewed_course"
+  post "/users/:user_id/viewed_course/:course_id/complete" => "users#complete_course"
 end

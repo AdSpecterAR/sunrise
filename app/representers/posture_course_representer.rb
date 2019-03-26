@@ -16,4 +16,5 @@ class PostureCourseRepresenter < Representable::Decorator
   property :gif_url
   property :audio_url
   property :thumbnail_image_url
+  property :order_in_track
 end

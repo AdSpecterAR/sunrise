@@ -7,5 +7,8 @@ class ViewedTrackRepresenter < Representable::Decorator
 
   property :id
   property :user_id
-  property :track, extend: TrackRepresenter
+  collection :viewed_courses
+  property :completed_courses
+  property :last_completed_course_number
+  property :track, extend: TrackRepresenter, class: Track
 end
