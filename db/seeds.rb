@@ -98,3 +98,8 @@ PostureCourse.create(
 
 Track.create(name: 'Posture', description: 'This is the track to improve posture', image_url: 'https://i.imgur.com/XntXG27.jpg', active: true)
 Track.create(name: 'Back Pain', description: 'This is the track to alleviate back pain', image_url: 'https://i.imgur.com/zg6E2eU.jpg', active: true)
+
+PostureCourse.create(name: 'Self Massage', duration: 5, category: 'Foam Rolling 101', thumbnail_image_url: 'https://i.imgur.com/zg6E2eU.jpg', difficulty: 'intermediate', track_id: 2, active: false, video_url: 'https://s3-us-west-1.amazonaws.com/cloudworkout/PostureApp/4+-+Hamstrings+and+Calves+Intro.mp4')
+PostureCourse.create(name: 'Deep Tissue with a Lacrosse Ball', duration: 5, category: 'Foam Rolling 101', difficulty: 'challenging', track_id: 2, active: false, thumbnail_image_url: 'https://i.imgur.com/zg6E2eU.jpg', video_url: 'https://s3-us-west-1.amazonaws.com/cloudworkout/PostureApp/4+-+Hamstrings+and+Calves+Intro.mp4')
+PostureCourse.create(name: 'Reading in Bed', duration: 5, category: 'Posture', difficulty: 'beginner', track_id: 1, order_in_track: 4, active: true, thumbnail_image_url: 'https://i.imgur.com/GYFVO0m.png', video_url: 'https://s3-us-west-1.amazonaws.com/cloudworkout/PostureApp/4+-+Hamstrings+and+Calves+Intro.mp4')
+PostureCourse.create(name: 'Confidence Boost', duration: 5, category: 'Office Break', difficulty: 'beginner', track_id: 2, active: true, thumbnail_image_url: 'https://i.imgur.com/WhiWKP9.png', video_url: 'https://s3-us-west-1.amazonaws.com/cloudworkout/PostureApp/4+-+Hamstrings+and+Calves+Intro.mp4')
