@@ -8,7 +8,7 @@ class PostureCourse < ApplicationRecord
     DIFFICULTY_INTERMEDIATE,
     DIFFICULTY_CHALLENGING,
   ]
-  CATEGORY_POSTURE = 'Posture'
+  CATEGORY_POSTURE = 'Better Posture'
   CATEGORY_DESK = 'Desk Stretches'
   CATEGORY_OFFICE_BREAK = 'Office Break'
   CATEGORY_STRETCHING = 'Stretching'
@@ -19,6 +19,7 @@ class PostureCourse < ApplicationRecord
   VALID_CATEGORIES = [
     CATEGORY_POSTURE,
     CATEGORY_DESK,
+    CATEGORY_OFFICE_BREAK,
     CATEGORY_STRETCHING,
     CATEGORY_FOAM_ROLLING,
     CATEGORY_NECK_PAIN,
