@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190326011954) do
+ActiveRecord::Schema.define(version: 20190401212357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,21 @@ ActiveRecord::Schema.define(version: 20190326011954) do
     t.index ["instructor_id"], name: "index_courses_on_instructor_id"
   end
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
   create_table "plans", force: :cascade do |t|
     t.string "name"
     t.string "stripe_plan_id"
@@ -67,6 +82,14 @@ ActiveRecord::Schema.define(version: 20190326011954) do
     t.integer "order_in_track"
     t.boolean "active"
     t.index ["track_id"], name: "index_posture_courses_on_track_id"
+  end
+
+  create_table "streaks", force: :cascade do |t|
+    t.datetime "first_course_date"
+    t.datetime "last_course_date"
+    t.boolean "active"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_streaks_on_user_id"
   end
 
   create_table "tracks", force: :cascade do |t|
@@ -116,6 +139,7 @@ ActiveRecord::Schema.define(version: 20190326011954) do
     t.string "stripe_subscription_id"
     t.string "profile_picture_url"
     t.string "firebase_uid"
+    t.integer "minutes_exercised"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["firebase_uid"], name: "index_users_on_firebase_uid"
@@ -143,6 +167,7 @@ ActiveRecord::Schema.define(version: 20190326011954) do
   add_foreign_key "courses", "users", column: "instructor_id"
   add_foreign_key "plans", "users"
   add_foreign_key "posture_courses", "tracks"
+  add_foreign_key "streaks", "users"
   add_foreign_key "tracks", "users"
   add_foreign_key "user_course_sessions", "users", column: "student_id"
   add_foreign_key "viewed_posture_courses", "posture_courses"
