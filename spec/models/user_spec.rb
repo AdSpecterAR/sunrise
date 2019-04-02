@@ -43,11 +43,11 @@ describe User, type: :model do
     it "should increment the existing current streak" do
       active_streak.update(last_course_date: 1.day.ago)
 
-      starting_streak_length = user.current_streak.length
+      starting_length = user.current_streak.length
 
       user.start_or_increment_streak
 
-      expect(user.current_streak.length).to eql starting_streak_length + 1
+      expect(user.current_streak.length).to eql starting_length + 1
     end
 
     it "should start a new streak" do

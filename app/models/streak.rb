@@ -15,9 +15,11 @@ class Streak < ApplicationRecord
 
   scope :active, -> { where(active: true) }
 
+
   ### CALLBACKS ###
 
   after_initialize :init
+
 
   ### METHODS ###
 
@@ -73,14 +75,5 @@ class Streak < ApplicationRecord
     second_date = last_course_date
 
     days_in_date_range(first_date, second_date) == 1
-
-    # current_day = Time.current.strftime('%d')
-    # end_day = last_course_date.strftime('%d')
-    #
-    # # in case there's an error and last_course_date is in the future
-    # days_ago = Time.current.to_date - last_course_date.to_date
-    # return true if days_ago < 0
-    #
-    # current_day == end_day
   end
 end
