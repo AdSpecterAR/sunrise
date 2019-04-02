@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   has_many :viewed_tracks
   has_many :viewed_posture_courses
-
+  has_many :streaks
   has_many :tracks, through: :viewed_tracks
   has_many :posture_courses, through: :viewed_posture_courses
   # has_many :user_course_sessions
@@ -29,9 +29,9 @@ class User < ApplicationRecord
 
   ### CALLBACKS ###
 
+  after_initialize :init
 
   ### CLASS METHODS ###
-
 
   def self.from_token_payload payload
     payload['sub']
@@ -39,8 +39,39 @@ class User < ApplicationRecord
 
   ### INSTANCE_METHODS ###
 
+  def init
+    self.minutes_exercised ||= 0
+  end
+
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def current_streak
+    self.streaks.active.first
+  end
+
+  def start_or_increment_streak
+    if current_streak.present?
+      current_streak.increment
+      current_streak
+    else
+      self.streaks.create
+    end
+  end
+
+  def longest_streak
+    # TODO: GET MOST RECENT OR ALL MAX?
+
+    streaks.max_by(&:length)
+  end
+
+  def complete_course(course_id)
+    @viewed_course = self.viewed_posture_courses.find_by(posture_course_id: course_id)
+
+    @viewed_course.update(completed: true)
+    self.update(minutes_exercised: self.minutes_exercised + @viewed_course.posture_course.duration)
+    self.start_or_increment_streak
   end
 
   #returns customer id

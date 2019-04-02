@@ -1,15 +1,19 @@
 require 'rails_helper'
 
 describe User, type: :model do
-  let(:user) { create(:user, :instructor) }
+  let!(:user) { create(:user) }
+  let!(:active_streak) { create(:streak, :active, user: user) }
+  let!(:ended_streak) { create(:streak, :ended, user: user) }
+  let!(:expiring_streak) { create(:streak, :expiring, user: user) }
+  let!(:longest_streak) { create(:streak, :longest, user: user) }
 
-=begin
-  let!(customer_params) do
-    {
-        stripeToken: 'tok_ca',
-    }
+
+  describe 'initialization' do
+    it "should return the correct default minutes exercised" do
+      expect(user.minutes_exercised).to eql 0
+      expect(user.minutes_exercised).not_to be_nil
+    end
   end
-=end
 
   describe 'validations' do
     it "should be valid" do
@@ -27,13 +31,39 @@ describe User, type: :model do
 
       expect(user).not_to be_valid
     end
+  end
 
-    it "should not be valid without the correct email format" do
-      user.update(email: "john@adspectercom")
+  describe '#current_streaks' do
+    it "should return the correct current streak" do
+      expect(user.current_streak.id).to eql active_streak.id
+    end
+  end
 
-      expect(user).not_to be_valid
+  describe '#start_or_increment_streak' do
+    it "should increment the existing current streak" do
+      active_streak.update(last_course_date: 1.day.ago)
+
+      starting_streak_length = user.current_streak.length
+
+      user.start_or_increment_streak
+
+      expect(user.current_streak.length).to eql starting_streak_length + 1
     end
 
+    it "should start a new streak" do
+      old_streak = user.current_streak.dup
+      old_streak.update(active: false)
+
+      user.start_or_increment_streak
+
+      expect(user.current_streak.id).not_to eql old_streak.id
+    end
+  end
+
+  describe '#longest_streak' do
+    it "should return the longest streak" do
+      expect(user.longest_streak.id).to eql longest_streak.id
+    end
   end
 
   describe 'find or create customers' do
@@ -53,37 +83,6 @@ describe User, type: :model do
       @customer_id = user.stripe_customer_id
       user.find_or_create_stripe_customer('tok_ca')
       expect(user.stripe_customer_id).to eql @customer_id
-    end
-
-  end
-
-  describe 'add_subscription' do
-    it "should add subsctiption id to user table" do
-      user.update(stripe_subscription_id: nil)
-      expect(user.stripe_subscription_id).to be_nil
-      user.add_subscription("sub_DHjbbsYn8jxp1H")
-      expect(user.stripe_subscription_id).not_to be_nil
-    end
-  end
-
-  describe 'cancel_subscription' do
-    it "removes stripe subsciption id" do
-
-      user.add_subscription("sub_DHjbbsYn8jxp1H")
-      expect(user.stripe_subscription_id).not_to be_nil
-      user.cancel_subscription
-      expect(user.stripe_subscription_id).to be_nil
-    end
-
-    it "doesn't update if it's not canceled on stripes end" do
-      user.add_subscription("sub_DHjbbsYn8jxp1H")
-      expect(user.stripe_subscription_id).not_to be_nil
-      @subscription = Stripe::Subscription.retrieve("sub_DHjbbsYn8jxp1H")
-      @subscription.delete
-
-      user.cancel_subscription
-
-      expect(user.stripe_subscription_id).not_to be_nil
     end
   end
 end
