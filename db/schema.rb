@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190401212357) do
+ActiveRecord::Schema.define(version: 20190408155027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20190401212357) do
     t.string "profile_picture_url"
     t.string "firebase_uid"
     t.integer "minutes_exercised"
+    t.string "reason"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["firebase_uid"], name: "index_users_on_firebase_uid"
