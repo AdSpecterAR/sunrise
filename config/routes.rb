@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :users
   resources :charges
 
+
   ### USERS ###
 
   root "course_sessions#upcoming_courses"
@@ -37,14 +38,17 @@ Rails.application.routes.draw do
 
   get "/courses" => "posture_courses#index"
   get "/courses/grouped_by_category" => "posture_courses#grouped_by_category"
-  #
+
   # put "/viewed_track/:id"
   # put "/viewed_posture_course/:id"
-  #
+
   # put "/completed_track/:id"
   # put "/completed_posture_course/:id"
   #
   get "/all_tracks" => "tracks#all"
+  get "/fetch_posture_reasons" => "users#fetch_posture_reasons"
+
+  post "/users/:user_id/finish_onboarding" => "users#finish_onboarding"
 
   post "/users/:user_id/select_track" => "users#select_track"
   post "/users/:user_id/viewed_course/:course_id" => "users#viewed_course"

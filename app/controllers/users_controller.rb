@@ -1,6 +1,7 @@
 require 'securerandom'
 
 class UsersController < ApplicationController
+  before_action :set_user, only: [:viewed_course, :complete_course, :finish_onboarding, :select_track]
 
   def create
     @user = User.new(user_params)
@@ -29,8 +30,6 @@ class UsersController < ApplicationController
   end
 
   def viewed_course
-    @user = User.find(params[:user_id])
-
     if @user.find_or_create_viewed_course(params[:course_id])
       render json: { user: UserRepresenter.represent(@user) }
     else
@@ -39,8 +38,6 @@ class UsersController < ApplicationController
   end
 
   def complete_course
-    @user = User.find(params[:user_id])
-
     if @user.complete_course(params[:course_id])
       render json: { user: UserRepresenter.represent(@user) }
     else
@@ -48,8 +45,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def finish_onboarding
+    if @user.finish_onboarding(params)
+      render json: { user: UserRepresenter.represent(@user) }
+    else
+      render json: { error: "error" }, status: 422
+    end
+  end
+
   def select_track
-    @user = User.find(params[:user_id])
     @track = Track.find(params[:track_id])
 
     @viewed_track = ViewedTrack.new(user_id: @user.id, track_id: @track.id)
@@ -77,6 +81,12 @@ class UsersController < ApplicationController
     )
   end
 
+  def reason_params
+    params
+      .require(:user)
+      .permit(:reason)
+  end
+
   def facebook_params
     params
       .require(:user)
@@ -91,4 +101,11 @@ class UsersController < ApplicationController
         :fb_account
       )
   end
+
+  private
+
+  def set_user
+    @user = User.find(params[:user_id])
+  end
+
 end

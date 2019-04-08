@@ -12,8 +12,11 @@ class Track < ApplicationRecord
   has_many :viewed_tracks
   has_many :users, through: :viewed_tracks
 
+
   ### SCOPES ###
+  #
   scope :active, -> { where(active: true) }
+
 
   ### VALIDATIONS ###
 

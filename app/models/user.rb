@@ -2,7 +2,24 @@ class User < ApplicationRecord
 
   ### INCLUDES ###
 
+
   ### CONSTANTS ###
+
+  REASON_TALLER = 'I want to stand taller'
+  REASON_BACK_PAIN = 'I want to alleviate my back pain'
+  REASON_DESK = 'I spend much of my day at a desk'
+  REASON_LOOK_BETTER = 'I want look more confident'
+  REASON_LIFT_HEAVY = 'I lift heavy things for my job'
+  REASON_SLEEP = 'I want to sleep better'
+
+  VALID_POSTURE_REASONS = [
+    REASON_TALLER,
+    REASON_BACK_PAIN,
+    REASON_DESK,
+    REASON_LOOK_BETTER,
+    REASON_LIFT_HEAVY,
+    REASON_SLEEP,
+  ]
 
 
   ### ASSOCIATIONS ###
@@ -31,11 +48,13 @@ class User < ApplicationRecord
 
   after_initialize :init
 
+
   ### CLASS METHODS ###
 
   def self.from_token_payload payload
     payload['sub']
   end
+
 
   ### INSTANCE_METHODS ###
 
@@ -64,6 +83,15 @@ class User < ApplicationRecord
     # TODO: GET MOST RECENT OR ALL MAX?
 
     streaks.max_by(&:length)
+  end
+
+  def valid_posture_reasons
+    VALID_POSTURE_REASONS
+  end
+
+  def finish_onboarding(params)
+    self.viewed_tracks.create(track_id: params[:track_id])
+    self.update(reason: params[:reason])
   end
 
   def complete_course(course_id)
