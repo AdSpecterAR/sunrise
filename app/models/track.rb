@@ -14,7 +14,7 @@ class Track < ApplicationRecord
 
 
   ### SCOPES ###
-  #
+
   scope :active, -> { where(active: true) }
 
 

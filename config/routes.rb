@@ -46,10 +46,8 @@ Rails.application.routes.draw do
   # put "/completed_posture_course/:id"
   #
   get "/all_tracks" => "tracks#all"
-  get "/fetch_posture_reasons" => "users#fetch_posture_reasons"
 
   post "/users/:user_id/finish_onboarding" => "users#finish_onboarding"
-
   post "/users/:user_id/select_track" => "users#select_track"
   post "/users/:user_id/viewed_course/:course_id" => "users#viewed_course"
   post "/users/:user_id/viewed_course/:course_id/complete" => "users#complete_course"
