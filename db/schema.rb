@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190408155027) do
+ActiveRecord::Schema.define(version: 20190411171626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20190408155027) do
     t.bigint "track_id"
     t.integer "order_in_track"
     t.boolean "active"
+    t.text "setup_instructions"
     t.index ["track_id"], name: "index_posture_courses_on_track_id"
   end
 
