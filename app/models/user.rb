@@ -21,6 +21,16 @@ class User < ApplicationRecord
     REASON_SLEEP,
   ]
 
+  ACTIVITY_LEVEL_LOW = 'low'
+  ACTIVITY_LEVEL_MODERATE = 'moderate'
+  ACTIVITY_LEVEL_HIGH = 'high'
+
+  VALID_ACTIVITY_LEVELS = [
+    ACTIVITY_LEVEL_LOW,
+    ACTIVITY_LEVEL_MODERATE,
+    ACTIVITY_LEVEL_HIGH
+  ]
+
 
   ### ASSOCIATIONS ###
 
@@ -42,6 +52,7 @@ class User < ApplicationRecord
   ### VALIDATIONS ###
 
   validates :first_name, :last_name, presence: true
+  # validates :activity_level, inclusion: { in: VALID_ACTIVITY_LEVELS }
 
 
   ### CALLBACKS ###
@@ -90,8 +101,10 @@ class User < ApplicationRecord
   end
 
   def finish_onboarding(params)
-    self.viewed_tracks.create(track_id: params[:track_id])
-    self.update(reason: params[:reason])
+    @current_track_id = params[:track_id]
+    self.viewed_tracks.create(track_id: @current_track_id)
+
+    self.update(params.except(:track_id))
   end
 
   def complete_course(course_id)
