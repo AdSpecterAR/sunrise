@@ -52,7 +52,7 @@ class User < ApplicationRecord
   ### VALIDATIONS ###
 
   validates :first_name, :last_name, presence: true
-  # validates :activity_level, inclusion: { in: VALID_ACTIVITY_LEVELS }
+  validates :activity_level, inclusion: { in: VALID_ACTIVITY_LEVELS }, allow_blank: true
 
 
   ### CALLBACKS ###
