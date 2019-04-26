@@ -102,8 +102,9 @@ class User < ApplicationRecord
 
   def finish_onboarding(params)
     @current_track_id = params[:track_id]
-    self.viewed_tracks.create(track_id: @current_track_id)
+    current_track = self.viewed_tracks.create(track_id: @current_track_id)
 
+    self.update(current_track: current_track)
     self.update(params.except(:track_id))
   end
 

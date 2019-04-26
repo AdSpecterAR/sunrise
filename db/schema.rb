@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20190426160347) do
     t.bigint "user_id"
     t.string "onboarding_text"
     t.string "onboarding_subtext"
+    t.string "onboarding_focus_text"
     t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
