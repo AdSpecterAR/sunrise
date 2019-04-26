@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190411171626) do
+ActiveRecord::Schema.define(version: 20190426160347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,9 @@ ActiveRecord::Schema.define(version: 20190411171626) do
     t.string "intro_video_url"
     t.boolean "active"
     t.bigint "user_id"
+    t.string "onboarding_text"
+    t.string "onboarding_subtext"
+    t.string "onboarding_focus_text"
     t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
@@ -142,6 +145,11 @@ ActiveRecord::Schema.define(version: 20190411171626) do
     t.string "firebase_uid"
     t.integer "minutes_exercised"
     t.string "reason"
+    t.integer "age"
+    t.string "activity_level"
+    t.string "gender"
+    t.integer "daily_notification_hour"
+    t.integer "daily_notification_minute"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["firebase_uid"], name: "index_users_on_firebase_uid"

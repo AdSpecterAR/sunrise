@@ -44,4 +44,5 @@ class PostureCourse < ApplicationRecord
   ### SCOPES ###
 
   scope :active, -> { where(active: true) }
+  default_scope { order(order_in_track: :asc)} # What if order_in_track is null?
 end

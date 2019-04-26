@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def finish_onboarding
-    if @user.finish_onboarding(params)
+    if @user.finish_onboarding(onboarding_params)
       render json: { user: UserRepresenter.represent(@user) }
     else
       render json: { error: "error" }, status: 422
@@ -79,6 +79,19 @@ class UsersController < ApplicationController
       :current_track,
       :password
     )
+  end
+
+  def onboarding_params
+    params
+      .require(:user)
+      .permit(
+        :age,
+        :activity_level,
+        :gender,
+        :daily_notification_hour,
+        :daily_notification_minute,
+        :track_id
+      )
   end
 
   def reason_params

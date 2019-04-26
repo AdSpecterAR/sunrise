@@ -16,6 +16,7 @@ class Track < ApplicationRecord
   ### SCOPES ###
 
   scope :active, -> { where(active: true) }
+  default_scope { order(id: :asc)}
 
 
   ### VALIDATIONS ###

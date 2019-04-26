@@ -17,6 +17,11 @@ class UserRepresenter < Representable::Decorator
   property :current_streak, decorator: StreakRepresenter, class: Streak
   property :longest_streak, decorator: StreakRepresenter, class: Streak
   property :minutes_exercised
+  property :age
+  property :activity_level
+  property :gender
+  property :daily_notification_hour
+  property :daily_notification_minute
   property :reason
   collection :valid_posture_reasons
   property :current_track, decorator: ViewedTrackRepresenter, class: ViewedTrack
