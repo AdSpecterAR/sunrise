@@ -4,6 +4,17 @@ class Track < ApplicationRecord
 
   ### CONSTANTS ###
 
+  KEY_BACK_PAIN = 'back_pain'
+  KEY_DESK = 'desk'
+  KEY_STRESS_AND_SLEEP = 'stress_and_sleep'
+  KEY_CONFIDENCE = 'confidence'
+
+  VALID_KEYS = [
+    KEY_BACK_PAIN,
+    KEY_DESK,
+    KEY_STRESS_AND_SLEEP,
+    KEY_CONFIDENCE
+  ]
 
   ### ASSOCIATIONS ###
 
@@ -22,6 +33,7 @@ class Track < ApplicationRecord
   ### VALIDATIONS ###
 
   validates :name, :image_url, :description, presence: true
+  validates :key, inclusion: { in: VALID_KEYS }
 
 
   ### CALLBACKS ###
