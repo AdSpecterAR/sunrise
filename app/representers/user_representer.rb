@@ -17,6 +17,7 @@ class UserRepresenter < Representable::Decorator
   property :current_streak, decorator: StreakRepresenter, class: Streak
   property :longest_streak, decorator: StreakRepresenter, class: Streak
   property :minutes_exercised
+  property :courses_completed_count
   property :age
   property :activity_level
   property :gender
@@ -28,4 +29,6 @@ class UserRepresenter < Representable::Decorator
   collection :knowledge_courses
   collection :streaks, decorator: StreakRepresenter, class: Streak
   collection :viewed_posture_courses, decorator: ViewedPostureCourseRepresenter, class: ViewedPostureCourse
+  collection :favorite_courses, decorator: ViewedPostureCourseRepresenter, class: ViewedPostureCourse
+  collection :recent_courses, decorator: ViewedPostureCourseRepresenter, class: ViewedPostureCourse
 end

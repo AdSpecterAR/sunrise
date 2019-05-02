@@ -1,7 +1,16 @@
 require 'securerandom'
 
 class UsersController < ApplicationController
-  before_action :set_user, only: [:viewed_course, :complete_course, :finish_onboarding, :select_track]
+  before_action :set_user, only: [
+    :viewed_course,
+    :complete_course,
+    :finish_onboarding,
+    :select_track,
+    :favorite_course,
+    :unfavorite_course,
+    :favorite_courses,
+    :recent_courses
+  ]
 
   def create
     @user = User.new(user_params)
@@ -51,6 +60,38 @@ class UsersController < ApplicationController
     else
       render json: { error: "error" }, status: 422
     end
+  end
+
+  def favorite_course
+    @course = ViewedPostureCourse.find(params[:viewed_posture_course_id])
+
+    if @course.favorite
+      render json: { user: UserRepresenter.represent(@user) }
+    else
+      render json: { error: "error" }, status: 422
+    end
+  end
+
+  def unfavorite_course
+    @course = ViewedPostureCourse.find(params[:viewed_posture_course_id])
+
+    if @course.unfavorite
+      render json: { user: UserRepresenter.represent(@user) }
+    else
+      render json: { error: "error" }, status: 422
+    end
+  end
+
+  def favorite_courses
+    @courses = @user.viewed_posture_courses.favorited
+
+    render json: { courses: ViewedPostureCourseRepresenter.for_collection.represent(@courses) }
+  end
+
+  def recent_courses
+    @courses = @user.viewed_posture_courses.completed
+
+    render json: { courses: ViewedPostureCourseRepresenter.for_collection.represent(@courses) }
   end
 
   def select_track
