@@ -121,7 +121,8 @@ class User < ApplicationRecord
     if self.stripe_customer_id.nil?
       #create new customer
       customer = Stripe::Customer.create(
-                source: stripeToken
+                source: stripeToken,
+                email: self.email
             )
 
       self.update(stripe_customer_id: customer.id)
