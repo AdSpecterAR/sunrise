@@ -42,6 +42,7 @@ gem 'rspec_api_documentation'
 gem 'stripe'
 gem 'delayed_job_active_record'
 gem 'whenever', require: false
+gem 'multi_json'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
