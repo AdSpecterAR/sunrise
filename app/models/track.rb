@@ -33,7 +33,7 @@ class Track < ApplicationRecord
   ### VALIDATIONS ###
 
   validates :name, :image_url, :description, presence: true
-  validates :key, inclusion: { in: VALID_KEYS }
+  # validates :key, inclusion: { in: VALID_KEYS }
 
 
   ### CALLBACKS ###
