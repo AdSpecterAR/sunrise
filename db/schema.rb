@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190426181309) do
+ActiveRecord::Schema.define(version: 20190527190203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,13 @@ ActiveRecord::Schema.define(version: 20190426181309) do
     t.integer "order_in_track"
     t.boolean "active"
     t.text "setup_instructions"
+    t.integer "completed_count", default: 0
+    t.integer "favorited_count", default: 0
+    t.integer "view_count", default: 0
+    t.datetime "last_completed_at"
+    t.datetime "last_favorited_at"
+    t.datetime "last_viewed_at"
+    t.string "course_type"
     t.index ["track_id"], name: "index_posture_courses_on_track_id"
   end
 
@@ -151,6 +158,7 @@ ActiveRecord::Schema.define(version: 20190426181309) do
     t.string "gender"
     t.integer "daily_notification_hour"
     t.integer "daily_notification_minute"
+    t.integer "courses_completed_count"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["firebase_uid"], name: "index_users_on_firebase_uid"
@@ -161,6 +169,12 @@ ActiveRecord::Schema.define(version: 20190426181309) do
     t.boolean "completed"
     t.bigint "posture_course_id"
     t.bigint "user_id"
+    t.datetime "last_completed_at"
+    t.datetime "last_favorited_at"
+    t.datetime "last_viewed_at"
+    t.integer "completed_count", default: 0
+    t.boolean "favorite", default: false
+    t.integer "view_count", default: 0
     t.index ["posture_course_id"], name: "index_viewed_posture_courses_on_posture_course_id"
     t.index ["user_id"], name: "index_viewed_posture_courses_on_user_id"
   end

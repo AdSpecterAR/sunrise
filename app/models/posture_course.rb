@@ -28,7 +28,7 @@ class PostureCourse < ApplicationRecord
 
   ### ASSOCIATIONS ###
 
-  belongs_to :track
+  belongs_to :track, optional: true
 
   has_many :viewed_posture_courses
   has_many :users, through: :viewed_posture_courses
@@ -44,5 +44,9 @@ class PostureCourse < ApplicationRecord
   ### SCOPES ###
 
   scope :active, -> { where(active: true) }
+  scope :track, -> { where(course_type: 'track') }
+  scope :explore, -> { where(course_type: 'explore') }
+  scope :knowledge, -> { where(course_type: 'knowledge') }
+  
   default_scope { order(order_in_track: :asc)} # What if order_in_track is null?
 end
