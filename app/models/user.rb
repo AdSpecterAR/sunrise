@@ -81,6 +81,10 @@ class User < ApplicationRecord
     self.streaks.active.first
   end
 
+  def knowledge_courses
+    PostureCourse.knowledge
+  end
+
   def start_or_increment_streak
     if current_streak.present?
       current_streak.increment
