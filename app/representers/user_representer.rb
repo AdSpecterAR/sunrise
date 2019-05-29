@@ -24,6 +24,7 @@ class UserRepresenter < Representable::Decorator
   property :daily_notification_minute
   property :reason
   collection :valid_posture_reasons
+  collection :knowledge_courses
   property :current_track, decorator: ViewedTrackRepresenter, class: ViewedTrack
   collection :streaks, decorator: StreakRepresenter, class: Streak
   collection :viewed_posture_courses do
