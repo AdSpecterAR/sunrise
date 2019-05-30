@@ -6,6 +6,7 @@ class PostureCourseRepresenter < Representable::Decorator
   defaults render_nil: true
 
   property :id
+  property :active
   property :name
   property :description
   property :duration
