@@ -89,6 +89,7 @@ class User < ApplicationRecord
   def start_or_increment_streak
     if current_streak.present? && !current_streak.expired?
       current_streak.increment
+      current_streak
     else
       self.streaks.create
     end
@@ -129,7 +130,7 @@ class User < ApplicationRecord
   end
 
   def increment_minutes_and_courses(duration)
-    self.update(minutes_exercised: minutes_exercised + duration, courses_completed_count: courses_completed_count + 1)
+    self.update(completed: true, minutes_exercised: minutes_exercised + duration, courses_completed_count: courses_completed_count + 1)
   end
 
   #returns customer id
