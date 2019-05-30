@@ -47,6 +47,14 @@ Rails.application.routes.draw do
 
   get "/all_tracks" => "tracks#all"
 
+  # get favorite classes
+  # get recent classes
+
+  get "/users/:user_id/favorite_courses" => "users#favorite_course"
+  get "/users/:user_id/recent_courses" => "users#recent_courses"
+
+  post "/users/:user_id/favorite_course" => "users#favorite_course"
+  post "/users/:user_id/unfavorite_course" => "users#unfavorite_course"
   post "/users/:user_id/finish_onboarding" => "users#finish_onboarding"
   post "/users/:user_id/select_track" => "users#select_track"
   post "/users/:user_id/viewed_course/:course_id" => "users#viewed_course"

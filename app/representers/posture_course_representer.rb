@@ -18,4 +18,10 @@ class PostureCourseRepresenter < Representable::Decorator
   property :audio_url
   property :thumbnail_image_url
   property :order_in_track
+  property :completed_count
+  property :favorited_count
+  property :view_count
+  property :last_completed_at
+  property :last_favorited_at
+  property :last_viewed_at
 end

@@ -71,6 +71,7 @@ class User < ApplicationRecord
 
   def init
     self.minutes_exercised ||= 0
+    self.courses_completed_count ||= 0
   end
 
   def full_name
@@ -86,9 +87,8 @@ class User < ApplicationRecord
   end
 
   def start_or_increment_streak
-    if current_streak.present?
+    if current_streak.present? && !current_streak.expired?
       current_streak.increment
-      current_streak
     else
       self.streaks.create
     end
@@ -98,6 +98,14 @@ class User < ApplicationRecord
     # TODO: GET MOST RECENT OR ALL MAX?
 
     streaks.max_by(&:length)
+  end
+
+  def favorite_courses
+    viewed_posture_courses.favorited
+  end
+
+  def recent_courses
+    viewed_posture_courses.completed
   end
 
   def valid_posture_reasons
@@ -114,10 +122,14 @@ class User < ApplicationRecord
 
   def complete_course(course_id)
     @viewed_course = self.viewed_posture_courses.find_by(posture_course_id: course_id)
+    @viewed_course.complete
 
-    @viewed_course.update(completed: true)
-    self.update(minutes_exercised: self.minutes_exercised + @viewed_course.posture_course.duration)
+    self.increment_minutes_and_courses(@viewed_course.posture_course.duration)
     self.start_or_increment_streak
+  end
+
+  def increment_minutes_and_courses(duration)
+    self.update(minutes_exercised: minutes_exercised + duration, courses_completed_count: courses_completed_count + 1)
   end
 
   #returns customer id
@@ -138,12 +150,17 @@ class User < ApplicationRecord
   end
 
   def find_or_create_viewed_course(course_id)
-    self
-      .viewed_posture_courses
-      .find_or_create_by(
-        user_id: self.id,
-        posture_course_id: course_id
-      )
+    # TODO: Add last_viewed_at and increment viewed_posture_course ???
+
+    @viewed_posture_course = self
+                              .viewed_posture_courses
+                              .find_or_create_by(
+                                user_id: self.id,
+                                posture_course_id: course_id
+                              )
+
+    @viewed_posture_course.view
+    @viewed_posture_course
   end
 
   def add_subscription(subscription_id)
@@ -153,7 +170,7 @@ class User < ApplicationRecord
     self.update(plan: plan)
   end
 
-  #Response body: { stripe: Stripe_subscription_response }
+  # Response body: { stripe: Stripe_subscription_response }
   # cancel removes the subscription from the user table, but does not remove subsctiption on stripes end
   def cancel_subscription
     subscription = Stripe::Subscription.retrieve(stripe_subscription_id)
