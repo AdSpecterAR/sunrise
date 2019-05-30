@@ -130,7 +130,7 @@ class User < ApplicationRecord
   end
 
   def increment_minutes_and_courses(duration)
-    self.update(completed: true, minutes_exercised: minutes_exercised + duration, courses_completed_count: courses_completed_count + 1)
+    self.update(minutes_exercised: minutes_exercised + duration, courses_completed_count: courses_completed_count + 1)
   end
 
   #returns customer id
