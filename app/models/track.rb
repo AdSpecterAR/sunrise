@@ -42,4 +42,11 @@ class Track < ApplicationRecord
   ### CLASS METHODS ###
 
 
+  def posture_courses
+    posture_courses.active
+  end
+
+  def all_posture_courses
+    posture_courses
+  end
 end
