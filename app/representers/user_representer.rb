@@ -18,6 +18,7 @@ class UserRepresenter < Representable::Decorator
   property :longest_streak, decorator: StreakRepresenter, class: Streak
   property :minutes_exercised
   property :courses_completed_count
+  property :goals_description
   property :age
   property :activity_level
   property :gender
