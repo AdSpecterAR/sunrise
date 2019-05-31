@@ -131,7 +131,8 @@ class UsersController < ApplicationController
         :gender,
         :daily_notification_hour,
         :daily_notification_minute,
-        :track_id
+        :track_id,
+        :goals_description
       )
   end
 
