@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   def favorite_course
     @course = ViewedPostureCourse.find(params[:viewed_posture_course_id])
 
-    if @course.favorite
+    if @course.favorite_course
       render json: { user: UserRepresenter.represent(@user) }
     else
       render json: { error: "error" }, status: 422
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   def unfavorite_course
     @course = ViewedPostureCourse.find(params[:viewed_posture_course_id])
 
-    if @course.unfavorite
+    if @course.unfavorite_course
       render json: { user: UserRepresenter.represent(@user) }
     else
       render json: { error: "error" }, status: 422

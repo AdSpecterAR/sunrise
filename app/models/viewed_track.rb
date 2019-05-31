@@ -25,12 +25,20 @@ class ViewedTrack < ApplicationRecord
 
   def viewed_courses
     self.user.viewed_posture_courses.select do |v|
-      v.posture_course.track.id == self.track.id
+      if v.posture_course.track_id.present?
+        v.posture_course.track.id == self.track.id
+      end
     end
   end
 
   def completed_courses
-    self.user.viewed_posture_courses.completed # has to match track ID
+    self.user.viewed_posture_courses.select do |v|
+      if v.posture_course.track_id.present?
+        v.posture_course.track_id == self.track_id && v.completed
+      end
+    end
+
+    # self.user.viewed_posture_courses.completed # has to match track ID
   end
 
   def last_completed_course_number
