@@ -123,8 +123,9 @@ class User < ApplicationRecord
 
   def complete_course(course_id)
     @viewed_course = self.viewed_posture_courses.find_by(posture_course_id: course_id)
-    @viewed_course.complete
+    # @viewed_course.complete
 
+    @viewed_course.update(completed: true, completed_count: @viewed_course.completed_count + 1, last_completed_at: Time.current)
     self.increment_minutes_and_courses(@viewed_course.posture_course.duration)
     self.start_or_increment_streak
   end
