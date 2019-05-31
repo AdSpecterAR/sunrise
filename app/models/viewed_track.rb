@@ -30,7 +30,7 @@ class ViewedTrack < ApplicationRecord
   end
 
   def completed_courses
-    viewed_courses.select { |a| a.completed }
+    self.user.viewed_posture_courses.completed # has to match track ID
   end
 
   def last_completed_course_number
@@ -39,9 +39,7 @@ class ViewedTrack < ApplicationRecord
     posture_courses = completed_courses.map{|a| a.posture_course}
     last_completed_course_number = posture_courses.max_by(&:order_in_track).order_in_track
 
-    if last_completed_course_number.nil?
-      return 0
-    end
+    return 0 if last_completed_course_number.nil?
 
     last_completed_course_number
   end

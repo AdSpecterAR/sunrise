@@ -50,7 +50,7 @@ class ViewedPostureCourse < ApplicationRecord
   end
 
   def complete
-    self.update(completed: true, completed_count: completed_count + 1, last_completed_at: Time.current)
     self.posture_course.increment_total_completed_count
+    # self.update(completed: true, completed_count: completed_count + 1, last_completed_at: Time.current)
   end
 end
