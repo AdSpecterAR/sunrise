@@ -37,8 +37,6 @@ class ViewedTrack < ApplicationRecord
         v.posture_course.track_id == self.track_id && v.completed
       end
     end
-
-    # self.user.viewed_posture_courses.completed # has to match track ID
   end
 
   def last_completed_course_number
