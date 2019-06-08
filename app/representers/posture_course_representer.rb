@@ -14,6 +14,7 @@ class PostureCourseRepresenter < Representable::Decorator
   property :difficulty
   property :setup_instructions
   property :equipment
+  property :video_thumbnail_url
   property :video_url
   property :gif_url
   property :audio_url
