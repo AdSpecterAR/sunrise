@@ -12,12 +12,6 @@ class UsersController < ApplicationController
     :recent_courses
   ]
 
-  def fetch_or_create_user
-    @user = User.fetch_or_create_user(user_params)
-
-    render json: { user: UserRepresenter.represent(@user) }
-  end
-
   def create
     @user = User.new(user_params)
 
@@ -124,7 +118,6 @@ class UsersController < ApplicationController
       :email,
       :firebase_uid,
       :current_track,
-      :fb_account,
       :password
     )
   end
@@ -147,21 +140,6 @@ class UsersController < ApplicationController
     params
       .require(:user)
       .permit(:reason)
-  end
-
-  def facebook_params
-    params
-      .require(:user)
-      .permit(
-        :first_name,
-        :last_name,
-        :full_name,
-        :email,
-        :password,
-        :fb_authentication_token,   #TODO : have to authenticate this
-        :fb_user_id,
-        :fb_account
-      )
   end
 
   private
