@@ -65,16 +65,6 @@ class User < ApplicationRecord
     payload['sub']
   end
 
-  def self.fetch_or_create_user(params)
-    @user = User.fetch(params[:firebase_uid])
-
-    if @user.nil?
-      @user = User.create(params)
-    end
-
-    @user
-  end
-
   def self.fetch(uid)
     User.find_by(firebase_uid: uid)
   end
