@@ -37,13 +37,11 @@ class User < ApplicationRecord
   has_one :plan
   has_one :current_track, class_name: 'ViewedTrack'
 
-  has_many :viewed_tracks
-  has_many :viewed_posture_courses
-  has_many :streaks
+  has_many :viewed_tracks, :dependent => :destroy
+  has_many :viewed_posture_courses, :dependent => :destroy
+  has_many :streaks, :dependent => :destroy
   has_many :tracks, through: :viewed_tracks
   has_many :posture_courses, through: :viewed_posture_courses
-  # has_many :user_course_sessions
-  # has_many :course_sessions, through: :user_course_sessions
 
 
   ### SCOPES ###
@@ -53,6 +51,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
   validates :activity_level, inclusion: { in: VALID_ACTIVITY_LEVELS }, allow_blank: true
+  validates_uniqueness_of :firebase_uid
 
 
   ### CALLBACKS ###
@@ -66,6 +65,19 @@ class User < ApplicationRecord
     payload['sub']
   end
 
+  def self.fetch_or_create_user(params)
+    @user = User.fetch(params[:firebase_uid])
+
+    if @user.nil?
+      @user = User.create(params)
+    end
+
+    @user
+  end
+
+  def self.fetch(uid)
+    User.find_by(firebase_uid: uid)
+  end
 
   ### INSTANCE_METHODS ###
 

@@ -12,6 +12,12 @@ class UsersController < ApplicationController
     :recent_courses
   ]
 
+  def fetch_or_create_user
+    @user = User.fetch_or_create_user(user_params)
+
+    render json: { user: UserRepresenter.represent(@user) }
+  end
+
   def create
     @user = User.new(user_params)
 
@@ -33,7 +39,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @user = User.find_by(firebase_uid: params[:firebase_uid])
+    @user = User.fetch(params[:firebase_uid])
 
     render json: { user: UserRepresenter.represent(@user) }
   end
@@ -118,6 +124,7 @@ class UsersController < ApplicationController
       :email,
       :firebase_uid,
       :current_track,
+      :fb_account,
       :password
     )
   end
