@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   root "course_sessions#upcoming_courses"
   post "/register_new_user" => "users#create", as: :create
+  post "/fetch_or_create_user" => "users#fetch_or_create_user", as: :fetch_or_create_user
   get "/fetch_user/:firebase_uid" => "users#index"
 
   post "/facebook_authentication" => "users#facebook_authentication", as: :facebook_authentication
