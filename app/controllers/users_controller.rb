@@ -118,7 +118,7 @@ class UsersController < ApplicationController
       :email,
       :firebase_uid,
       :current_track,
-      :password
+      :encrypted_password
     )
   end
 
